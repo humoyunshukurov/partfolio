@@ -3,7 +3,7 @@
 Shaxsiy portfolio-sayt: fullstack dasturchi haqida qisqacha maʼlumot, ko'nikmalar va serverga joylashtirilgan loyihalar.
 
 - Til almashtirish: UZ / RU / EN
-- Ochiq/qorongʻi rejim: tizim sozlamasiga moslashadi
+- Yoqimli oq/yorug' dizayn (qorong'i rejimsiz, doim bir xil ko'rinish)
 - Bitta statik `index.html` fayl — build qadamisiz to'g'ridan-to'g'ri ochiladi yoki istalgan statik hosting'ga (GitHub Pages, Vercel, Netlify) joylash mumkin
 
 ## Loyihalar
