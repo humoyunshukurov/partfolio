@@ -153,9 +153,10 @@
     margin: 0 auto;
     padding: 14px clamp(18px, 4vw, 32px);
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 24px;
+    gap: 12px 24px;
   }
   .brand{
     font-family: "IBM Plex Mono", monospace;
@@ -165,11 +166,16 @@
     text-decoration: none;
   }
   .brand span{ color: var(--accent); }
+  /* No hamburger toggle - always visible, just reflows: a full row on
+     desktop, its own scrollable strip below brand+controls once it no
+     longer fits (see the max-width:640px block), so navigation never
+     needs a menu icon to get to. */
   .nav-links{
     display: flex;
     gap: 26px;
     margin-left: 8px;
     flex: 1;
+    min-width: 0;
   }
   .nav-links a{
     text-decoration: none;
@@ -177,6 +183,7 @@
     color: var(--ink-soft);
     position: relative;
     padding: 4px 0;
+    white-space: nowrap;
     transition: color .15s ease;
   }
   .nav-links a:hover{ color: var(--ink); }
@@ -215,71 +222,35 @@
   }
   .nav-cta:hover{ border-color: var(--accent); background: var(--accent-soft); transform: translateY(-1px); }
 
-  /* ---------- Mobile nav toggle ---------- */
-  .nav-toggle{
-    display: none;
-    align-items: center;
-    justify-content: center;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: var(--glow);
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: transform .18s cubic-bezier(.16,1,.3,1), box-shadow .18s ease;
-    -webkit-tap-highlight-color: transparent;
-  }
-  .nav-toggle:hover{ transform: translateY(-1px); box-shadow: 0 16px 34px -10px rgba(14,110,92,.55); }
-  .nav-toggle:active{ transform: translateY(0) scale(.94); }
-  .nav-toggle-bars{ position: relative; width: 17px; height: 12px; display: block; }
-  .nav-toggle-bar{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 2px;
-    border-radius: 2px;
-    background: #fff;
-    transition: transform .25s cubic-bezier(.16,1,.3,1), opacity .2s ease, top .25s cubic-bezier(.16,1,.3,1);
-  }
-  .nav-toggle-bar:nth-child(1){ top: 0; }
-  .nav-toggle-bar:nth-child(2){ top: 5px; }
-  .nav-toggle-bar:nth-child(3){ top: 10px; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1){ top: 5px; transform: rotate(45deg); }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2){ opacity: 0; }
-  .nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3){ top: 5px; transform: rotate(-45deg); }
-
-  .mobile-menu{
-    display: none;
-    flex-direction: column;
-    border-top: 1px solid var(--line);
-    background: var(--surface);
-    padding: 6px clamp(18px, 4vw, 32px) 14px;
-  }
-  .mobile-menu.open{ display: flex; }
-  .mobile-menu a{
-    padding: 13px 2px;
-    font-size: 1rem;
-    color: var(--ink-soft);
-    text-decoration: none;
-    border-bottom: 1px solid var(--line);
-    transition: color .15s ease;
-  }
-  .mobile-menu a:last-child{ border-bottom: none; }
-  .mobile-menu a:hover{ color: var(--ink); }
-  .mobile-menu-cta{ color: var(--accent-ink) !important; font-weight: 600; }
-
   @media (max-width: 640px){
-    .nav-links{ display: none; }
-    .nav-cta{ display: none; }
-    .nav-toggle{ display: inline-flex; }
+    /* Brand + lang switch + Rezyume stay one row (nav-inner still wraps,
+       but this trio's combined width fits) - nav-links drops to its own
+       full-width row right below, scrolling horizontally instead of
+       wrapping line-by-line so link labels never break mid-word. */
+    .nav-links{
+      order: 3;
+      /* flex-basis alone, NOT the "flex" shorthand - "flex: none" also
+         resets basis to auto, which undoes this and was why the row
+         wouldn't confine itself to one line (min-width:0 above is what
+         then lets it actually shrink to that basis instead of growing
+         to fit its nowrap content). */
+      flex-basis: 100%;
+      min-width: 0;
+      gap: 18px;
+      margin-left: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+      /* Fades the last link toward transparent so a cut-off word (e.g.
+         "Ko'nikmalar" on a narrow phone) reads as "more to scroll",
+         not as clipped/broken content. */
+      -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent 100%);
+      mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent 100%);
+    }
+    .nav-links::-webkit-scrollbar{ display: none; }
+    .nav-links a{ font-size: .86rem; }
     .lang-btn{ height: 30px; }
-  }
-  @media (min-width: 641px){
-    .mobile-menu{ display: none !important; }
   }
 
   /* ---------- Hero ---------- */
@@ -683,21 +654,7 @@
         <button type="button" class="lang-btn" data-lang="en">EN</button>
       </div>
       <a class="nav-cta" href="https://claude.ai/code/artifact/99742c99-075a-4c79-b7be-75f4b4c973c5" target="_blank" rel="noopener" data-i18n="navResume">Rezyume ↗</a>
-      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Menyu">
-        <span class="nav-toggle-bars">
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-          <span class="nav-toggle-bar"></span>
-        </span>
-      </button>
     </div>
-  </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="#home" data-i18n="navHome">Bosh sahifa</a>
-    <a href="#about" data-i18n="navAbout">Men haqimda</a>
-    <a href="#projects" data-i18n="navProjects">Loyihalar</a>
-    <a href="#skills" data-i18n="navSkills">Koʻnikmalar</a>
-    <a class="mobile-menu-cta mono" href="https://claude.ai/code/artifact/99742c99-075a-4c79-b7be-75f4b4c973c5" target="_blank" rel="noopener" data-i18n="navResume">Rezyume ↗</a>
   </div>
 </nav>
 
@@ -998,41 +955,6 @@
     });
   });
 
-  /* ---------- Mobile nav toggle ---------- */
-  var navToggle = document.getElementById('navToggle');
-  var mobileMenu = document.getElementById('mobileMenu');
-
-  function closeMenu(){
-    if (!navToggle || !mobileMenu) return;
-    navToggle.setAttribute('aria-expanded', 'false');
-    mobileMenu.classList.remove('open');
-  }
-  function openMenu(){
-    if (!navToggle || !mobileMenu) return;
-    navToggle.setAttribute('aria-expanded', 'true');
-    mobileMenu.classList.add('open');
-  }
-
-  if (navToggle && mobileMenu){
-    navToggle.addEventListener('click', function(){
-      var isOpen = navToggle.getAttribute('aria-expanded') === 'true';
-      if (isOpen) closeMenu(); else openMenu();
-    });
-    mobileMenu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', closeMenu);
-    });
-    document.addEventListener('click', function(e){
-      if (!mobileMenu.classList.contains('open')) return;
-      if (mobileMenu.contains(e.target) || navToggle.contains(e.target)) return;
-      closeMenu();
-    });
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape') closeMenu();
-    });
-    window.addEventListener('resize', function(){
-      if (window.innerWidth > 640) closeMenu();
-    });
-  }
 })();
 </script>
 </body>
