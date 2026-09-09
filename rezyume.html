@@ -1,0 +1,1159 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Shukurov Humoyun - rezyume: fullstack dasturchi (Node.js, React, TypeScript). Ish tajribasi, loyihalar, ko'nikmalar.">
+<meta name="theme-color" content="#eef1f5">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Humoyun Shukurov">
+<meta property="og:url" content="https://partfolio-black.vercel.app/rezyume.html">
+<meta property="og:title" content="Humoyun Shukurov - Rezyume">
+<meta property="og:description" content="Fullstack dasturchi (Node.js, React, TypeScript). Ish tajribasi, loyihalar, ko'nikmalar.">
+<meta property="og:image" content="https://partfolio-black.vercel.app/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://partfolio-black.vercel.app/og-image.jpg">
+<title>Humoyun Shukurov — Rezyume</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230e6e5c'/%3E%3Ctext x='50' y='69' font-family='monospace' font-size='52' font-weight='700' fill='%23ffffff' text-anchor='middle'%3Ehs%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --bg: #eef1f5;
+    --surface: #ffffff;
+    --surface-alt: #e7ebf1;
+    --ink: #161a22;
+    --ink-soft: #525a6b;
+    --ink-faint: #7d8496;
+    --line: #d9dee6;
+    --accent: #0e6e5c;
+    --accent-ink: #0a5647;
+    --accent-soft: #e2f0ec;
+    --shadow: 0 1px 2px rgba(22,26,34,.04), 0 12px 28px -18px rgba(22,26,34,.22);
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #12151b;
+      --surface: #1a1e27;
+      --surface-alt: #232937;
+      --ink: #edeff3;
+      --ink-soft: #a7aebd;
+      --ink-faint: #767e90;
+      --line: #2c3140;
+      --accent: #3fcaa8;
+      --accent-ink: #8fe9cf;
+      --accent-soft: #1a332e;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 20px 40px -24px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #12151b;
+    --surface: #1a1e27;
+    --surface-alt: #232937;
+    --ink: #edeff3;
+    --ink-soft: #a7aebd;
+    --ink-faint: #767e90;
+    --line: #2c3140;
+    --accent: #3fcaa8;
+    --accent-ink: #8fe9cf;
+    --accent-soft: #1a332e;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 20px 40px -24px rgba(0,0,0,.6);
+  }
+
+  *{ box-sizing: border-box; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    margin: 0;
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  }
+  :focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+
+  .page{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 56px) clamp(16px, 4vw, 28px) 64px;
+  }
+
+  .sheet{
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .sheet::before{
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 25%, var(--surface)));
+  }
+
+  .mono{ font-family: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace; }
+
+  .eyebrow{
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: .74rem;
+    font-weight: 600;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 14px;
+  }
+  .eyebrow::before{
+    content: "";
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ---------- Header controls ---------- */
+  .controls-row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .download-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--surface-alt);
+    color: var(--ink-soft);
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: .74rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .download-btn:hover{
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    background: var(--accent-soft);
+  }
+
+  .lang-switch{
+    position: relative;
+    display: inline-flex;
+    gap: 2px;
+    background: var(--surface-alt);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px;
+  }
+  .lang-indicator{
+    position: absolute;
+    top: 3px; bottom: 3px; left: 3px;
+    width: 30px;
+    border-radius: 999px;
+    background: var(--accent);
+    transition: transform .3s cubic-bezier(.16,1,.3,1);
+    z-index: 0;
+  }
+  .lang-btn{
+    position: relative;
+    z-index: 1;
+    width: 30px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .66rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--ink-soft);
+    transition: color .2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lang-btn.active{ color: #fff; }
+
+  .theme-toggle{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .theme-toggle-track{
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    border: 1px solid var(--line);
+    padding: 3px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .theme-toggle.is-dark .theme-toggle-track{
+    background: color-mix(in srgb, var(--accent) 26%, var(--surface-alt));
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  }
+  .theme-toggle-thumb{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--surface);
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+    transform: translateX(0);
+    transition: transform .32s cubic-bezier(.16,1,.3,1);
+  }
+  .theme-toggle.is-dark .theme-toggle-thumb{
+    transform: translateX(22px);
+    background: var(--accent);
+  }
+  .theme-toggle-thumb svg{
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 12px; height: 12px;
+    margin: -6px 0 0 -6px;
+    transition: opacity .2s ease, transform .32s cubic-bezier(.16,1,.3,1);
+  }
+  .icon-sun{ color: #d98c1f; opacity: 1; transform: rotate(0deg) scale(1); }
+  .icon-moon{ color: #1a1e27; opacity: 0; transform: rotate(-45deg) scale(.5); }
+  .theme-toggle.is-dark .icon-sun{ opacity: 0; transform: rotate(45deg) scale(.5); }
+  .theme-toggle.is-dark .icon-moon{ opacity: 1; transform: rotate(0deg) scale(1); color: #fff; }
+  @media print{ .theme-toggle, .lang-switch, .download-btn{ display: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: clamp(28px, 4vw, 44px) clamp(24px, 5vw, 48px) 30px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .hero-top{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero-id{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .avatar-photo{
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 22%;
+    border: 3px solid var(--surface);
+    box-shadow: var(--shadow);
+    flex-shrink: 0;
+  }
+  .hero-top-right{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .name{
+    font-family: "Bricolage Grotesque", "IBM Plex Sans", sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.9rem, 4.2vw, 2.6rem);
+    line-height: 1.05;
+    letter-spacing: -.01em;
+    margin: 0 0 6px;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .role{
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-weight: 500;
+    font-size: 1.14rem;
+    color: var(--accent-ink);
+    margin: 0;
+  }
+  .updated{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .7rem;
+    letter-spacing: .02em;
+    color: var(--ink-faint);
+    white-space: nowrap;
+  }
+  .contact-strip{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-size: .92rem;
+    color: var(--ink-soft);
+  }
+  .contact-strip span{ display:inline-flex; align-items:center; gap:.4em; }
+  .contact-strip b{ font-weight: 600; color: var(--ink); }
+  .contact-strip .sep{ color: var(--line); }
+  .contact-strip a{ color: inherit; text-decoration: none; }
+  .contact-strip a:hover{ color: var(--accent-ink); text-decoration: underline; }
+
+  /* ---------- Layout ---------- */
+  .layout{
+    display: grid;
+    grid-template-columns: 260px 1fr;
+  }
+  @media (max-width: 720px){
+    .layout{ grid-template-columns: 1fr; }
+    .sidebar{ border-right: none !important; border-bottom: 1px solid var(--line); }
+  }
+
+  .sidebar{
+    padding: 8px 26px;
+    border-right: 1px solid var(--line);
+    background: var(--surface-alt);
+    display: flex;
+    flex-direction: column;
+  }
+  .side-block{
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .side-block:last-child{ border-bottom: none; }
+
+  .side-block dl{ margin: 0; display: grid; gap: 12px; }
+  .side-block .row{ display: flex; flex-direction: column; gap: 3px; }
+  .side-block dt{
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .side-block dd{ margin: 0; font-size: .92rem; color: var(--ink); }
+  .side-block dd.muted{ color: var(--ink-soft); }
+
+  .skill-group{ margin-bottom: 16px; }
+  .skill-group:last-child{ margin-bottom: 0; }
+  .skill-group h4{
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: .7rem;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin: 0 0 9px;
+  }
+  .tags{ display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .74rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .tag:hover{ border-color: var(--accent); color: var(--ink); }
+
+  .lang-row{ display: flex; justify-content: space-between; gap: 10px; font-size: .92rem; }
+  .lang-row + .lang-row{ margin-top: 9px; }
+  .lang-name{ color: var(--ink); }
+  .lang-level{ color: var(--ink-faint); font-family: "IBM Plex Mono", monospace; font-size: .74rem; white-space: nowrap; }
+
+  /* ---------- Main content ---------- */
+  .content{
+    padding: 32px clamp(24px, 4vw, 44px) 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    min-width: 0;
+  }
+  section h2{
+    font-family: "Bricolage Grotesque", sans-serif;
+    font-size: 1.24rem;
+    font-weight: 600;
+    margin: 0 0 4px;
+    color: var(--ink);
+  }
+  .about p{
+    max-width: 62ch;
+    font-size: .98rem;
+    line-height: 1.68;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .entry{
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 16px;
+    padding: 16px 0;
+  }
+  .entry + .entry{ border-top: 1px solid var(--line); }
+  .entry-title{
+    font-size: 1.02rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+  }
+  .entry-org{
+    font-size: .9rem;
+    color: var(--accent-ink);
+    margin: 2px 0 0;
+  }
+  .entry-date{
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .76rem;
+    color: var(--ink-faint);
+    white-space: nowrap;
+    text-align: right;
+    padding-top: 3px;
+  }
+  .entry-industry{
+    grid-column: 1 / -1;
+    font-size: .8rem;
+    color: var(--ink-faint);
+    margin: 6px 0 0;
+  }
+  .entry-desc{
+    grid-column: 1 / -1;
+    font-size: .94rem;
+    line-height: 1.62;
+    color: var(--ink-soft);
+    margin: 10px 0 0;
+    max-width: 64ch;
+  }
+
+  .stack{ display: flex; flex-direction: column; }
+  .stack .entry:first-child{ padding-top: 0; }
+
+  .project-roles{
+    grid-column: 1 / -1;
+    margin: 10px 0 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 4px;
+    max-width: 64ch;
+  }
+  .project-roles li{
+    font-size: .9rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .project-roles li::marker{ color: var(--accent); }
+  .project-link{
+    grid-column: 1 / -1;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+    width: fit-content;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--accent-ink);
+    text-decoration: none;
+  }
+  .project-link:hover{ text-decoration: underline; }
+
+  footer.note{
+    padding: 18px clamp(24px, 5vw, 48px) 26px;
+    border-top: 1px solid var(--line);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .72rem;
+    color: var(--ink-faint);
+  }
+
+  @media print{
+    body{ background: #fff; }
+    .page{ padding: 0; max-width: none; }
+    .sheet{ box-shadow: none; border: none; border-radius: 0; }
+    .sheet::before{ display: none; }
+    .sidebar{ background: #f4f6f9; }
+  }
+</style>
+
+<div class="page">
+  <div class="sheet">
+
+    <header class="hero">
+      <div class="hero-top">
+        <div class="hero-id">
+          <img class="avatar-photo" src="data:image/jpeg;base64,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" alt="Shukurov Humoyun">
+          <div>
+            <p class="role" data-i18n="role">Fullstack dasturchi</p>
+            <h1 class="name" data-i18n="name">Shukurov Humoyun</h1>
+          </div>
+        </div>
+        <div class="hero-top-right">
+          <div class="controls-row">
+            <div class="lang-switch" role="group" aria-label="Til / Язык / Language">
+              <span class="lang-indicator"></span>
+              <button type="button" class="lang-btn" data-lang="uz">UZ</button>
+              <button type="button" class="lang-btn" data-lang="ru">RU</button>
+              <button type="button" class="lang-btn" data-lang="en">EN</button>
+            </div>
+            <button type="button" id="theme-toggle" class="theme-toggle" data-i18n-aria-label="themeToggleLabel" aria-label="Ochiq/qorongʻi rejimni almashtirish" aria-pressed="false">
+              <span class="theme-toggle-track">
+                <span class="theme-toggle-thumb">
+                  <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+                  <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1Z"/></svg>
+                </span>
+              </span>
+            </button>
+            <button type="button" id="resume-download" class="download-btn" data-i18n-aria-label="downloadAriaLabel" aria-label="Rezyumeni PDF sifatida yuklab olish">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+              <span data-i18n="downloadLabel">Yuklab olish</span>
+            </button>
+          </div>
+          <span class="updated mono" data-i18n="updated">YANGILANGAN 2026-08-30</span>
+        </div>
+      </div>
+
+      <div class="contact-strip">
+        <span><b data-i18n="contactCity">Toshkent, Oʻzbekiston</b></span>
+        <span class="sep">·</span>
+        <span>+998 94 933 49 69</span>
+        <span class="sep">·</span>
+        <span>Telegram: <b>@Humoyun_Mirzo07</b></span>
+        <span class="sep">·</span>
+        <span><a href="mailto:humoyunshukurov12@gmail.com">humoyunshukurov12@gmail.com</a></span>
+        <span class="sep">·</span>
+        <span><a href="https://github.com/humoyunshukurov" target="_blank" rel="noopener">github.com/humoyunshukurov</a></span>
+        <span class="sep">·</span>
+        <span data-i18n="contactAge">19 yosh (2007-yil 19-iyun)</span>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+
+        <div class="side-block">
+          <p class="eyebrow" data-i18n="eyebrowPersonal">Shaxsiy maʼlumot</p>
+          <dl>
+            <div class="row"><dt data-i18n="dtCitizenship">Fuqarolik</dt><dd data-i18n="ddCitizenship">Oʻzbekiston</dd></div>
+            <div class="row"><dt data-i18n="dtWorkPermit">Ish ruxsatnomasi</dt><dd data-i18n="ddWorkPermit">Oʻzbekiston</dd></div>
+            <div class="row"><dt data-i18n="dtSpecialization">Mutaxassislik</dt><dd data-i18n="ddSpecialization">Dasturchi</dd></div>
+          </dl>
+        </div>
+
+        <div class="side-block">
+          <p class="eyebrow" data-i18n="eyebrowWork">Ish sharoiti</p>
+          <dl>
+            <div class="row"><dt data-i18n="dtEmploymentType">Bandlik turi</dt><dd class="muted" data-i18n="ddEmploymentType">Toʻliq va yarim ish kuni, loyiha asosida</dd></div>
+            <div class="row"><dt data-i18n="dtWorkFormat">Ish formati</dt><dd class="muted" data-i18n="ddWorkFormat">Ish beruvchi hududida</dd></div>
+            <div class="row"><dt data-i18n="dtCommute">Yoʻlga sarf vaqt</dt><dd class="muted" data-i18n="ddCommute">Ahamiyati yoʻq</dd></div>
+          </dl>
+        </div>
+
+        <div class="side-block">
+          <p class="eyebrow" data-i18n="eyebrowLangs">Tillar</p>
+          <div class="lang-row">
+            <span class="lang-name" data-i18n="langNative">Oʻzbek tili</span>
+            <span class="lang-level" data-i18n="langNativeLevel">Ona tili</span>
+          </div>
+          <div class="lang-row">
+            <span class="lang-name" data-i18n="langEnglish">Ingliz tili</span>
+          </div>
+        </div>
+
+        <div class="side-block">
+          <p class="eyebrow" data-i18n="eyebrowSkills">Koʻnikmalar</p>
+
+          <div class="skill-group">
+            <h4 data-i18n="skillGroupArch">Arxitektura</h4>
+            <div class="tags">
+              <span class="tag">Vertical Slice</span>
+              <span class="tag">Layer Architecture</span>
+              <span class="tag">MVVM</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4 data-i18n="skillGroupLangs">Dasturlash tillari</h4>
+            <div class="tags">
+              <span class="tag">JavaScript</span>
+              <span class="tag">TypeScript</span>
+              <span class="tag">Python</span>
+              <span class="tag">C</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4>Backend</h4>
+            <div class="tags">
+              <span class="tag">Node.js</span>
+              <span class="tag">Express.js</span>
+              <span class="tag">NestJS</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4>Frontend</h4>
+            <div class="tags">
+              <span class="tag">React</span>
+              <span class="tag">Next.js</span>
+              <span class="tag">HTML</span>
+              <span class="tag">CSS</span>
+              <span class="tag">Tailwind CSS</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4 data-i18n="skillGroupDb">Maʼlumotlar bazasi</h4>
+            <div class="tags">
+              <span class="tag">SQL</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">MySQL</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4 data-i18n="skillGroupDevops">DevOps va vositalar</h4>
+            <div class="tags">
+              <span class="tag">Docker</span>
+              <span class="tag">Docker Compose</span>
+              <span class="tag">Git</span>
+              <span class="tag">GitHub</span>
+              <span class="tag">Linux</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <h4 data-i18n="skillGroupApi">API va tizimlar</h4>
+            <div class="tags">
+              <span class="tag">REST API</span>
+              <span class="tag">Web API</span>
+              <span class="tag">ERP</span>
+              <span class="tag">ERP tizimlari</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="side-block">
+          <p class="eyebrow" data-i18n="eyebrowTraits">Shaxsiy fazilatlar</p>
+          <div class="tags">
+            <span class="tag" data-i18n="trait1">Tez oʻrganish</span>
+            <span class="tag" data-i18n="trait2">Muammolarni hal qilish</span>
+            <span class="tag" data-i18n="trait3">Jamoada ishlash</span>
+            <span class="tag" data-i18n="trait4">Izlanuvchanlik</span>
+            <span class="tag" data-i18n="trait5">Kreativ yondashish</span>
+            <span class="tag" data-i18n="trait6">Oʻziga ishonch</span>
+          </div>
+        </div>
+
+      </aside>
+
+      <main class="content">
+
+        <section class="about">
+          <h2 data-i18n="aboutHeading">Men haqimda</h2>
+          <p style="margin-top:10px;" data-i18n="aboutP1">
+            Full-stack dasturchi (Node.js / React / TypeScript). Tijorat loyihalarini ishlab chiqish,
+            maʼlumotlar bazasini loyihalash va backend xizmatlarini optimallashtirish boʻyicha tajribaga
+            egaman. Shuningdek, dasturlashni oʻrgatish tajribam ham bor.
+          </p>
+          <p style="margin-top:12px;" data-i18n="aboutP2">
+            Docker, PostgreSQL, NestJS va Tailwind CSS'dan faol foydalanaman. Ishlab chiqishni
+            tezlashtirish, kodni optimallashtirish va promptlar yozish uchun AI vositalaridan samarali
+            foydalanaman. Boshqa odamlarning kodini tez tushunaman, jamoada ishlay olaman va texnik
+            darajamni doimiy oshirib boraman.
+          </p>
+          <p style="margin-top:12px;" data-i18n="aboutP3">
+            Najot Taʼlimda 1 yildan beri oʻqib, Full Stack yoʻnalishi boʻyicha 8 oylik amaliy tajriba
+            orttirdim — 4 ta real loyihani boshqargan va 3 kishilik jamoa bilan ishlaganman.
+          </p>
+        </section>
+
+        <section>
+          <h2 data-i18n="expHeading">Ish tajribasi</h2>
+          <div class="stack">
+            <div class="entry">
+              <div>
+                <p class="entry-title" data-i18n="expRole">Mentor</p>
+                <p class="entry-org" data-i18n="expOrg">Najot Taʼlim Markazi — Toshkent</p>
+              </div>
+              <p class="entry-date" data-i18n="expDate">Aprel 2026 — hozirgi kunga qadar · 5 oy</p>
+              <p class="entry-industry" data-i18n="expIndustry">Axborot texnologiyalari, tizim integratsiyasi, internet — dasturiy taʼminotni ishlab chiqish</p>
+              <p class="entry-desc" data-i18n="expDesc">
+                Talabalarga Full Stack dasturlashni (Node.js, Nest.js, Python, SQL) oʻrgatish va amaliy
+                loyihalar boʻyicha mentorlik qilish. Shu bilan birga bir nechta startaplar uchun backend
+                qismini ishlab chiqishda ishtirok etdim. Jamoada samarali ishlash tajribasiga egaman, yangi
+                vazifalarga tez moslashaman va hamkasblar hamda talabalar bilan tez til topisha olaman.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 data-i18n="projHeading">Loyihalar</h2>
+          <div class="stack">
+
+            <div class="entry">
+              <div>
+                <p class="entry-title">Unim</p>
+                <p class="entry-org" data-i18n="proj1Org">Sogʻliqni nazorat qiluvchi platforma</p>
+              </div>
+              <p class="entry-desc" data-i18n="proj1Desc">
+                Oʻzbekistondagi barcha dorilarni nazorat qiladigan, kundalik sogʻliq yordamchisi.
+                Foydalanuvchilar mutaxassislardan onlayn tavsiyalar ola oladi.
+              </p>
+              <ul class="project-roles">
+                <li data-i18n="proj1Role1">Backend API dizayni va API controllerlarni yozish</li>
+                <li data-i18n="proj1Role2">Feature Architecture arxitekturasida loyihani boshqarish</li>
+              </ul>
+              <a class="project-link" href="https://unim-beta.vercel.app/" target="_blank" rel="noopener" data-i18n="projLinkDemo">Demo koʻrish ↗</a>
+            </div>
+
+            <div class="entry">
+              <div>
+                <p class="entry-title">BuildingFinder</p>
+                <p class="entry-org" data-i18n="proj2Org">Qurilish mollari marketplaceʼi</p>
+              </div>
+              <p class="entry-desc" data-i18n="proj2Desc">
+                Koʻp doʻkonli (multi-vendor) onlayn bozor platformasi — Admin, Doʻkon egasi va Xaridor
+                rollari bilan. Hozirda productionʼda ishlamoqda.
+              </p>
+              <ul class="project-roles">
+                <li data-i18n="proj2Role1">Butun loyihani boshqarish (Fullstack)</li>
+                <li data-i18n="proj2Role2">TypeScript bilan yozilgan</li>
+                <li data-i18n="proj2Role3">Backend va Frontend qismlarini toʻliq ishlab chiqish</li>
+              </ul>
+              <a class="project-link" href="https://building-frontend-three.vercel.app/" target="_blank" rel="noopener" data-i18n="projLinkView">Koʻrish ↗</a>
+            </div>
+
+            <div class="entry">
+              <div>
+                <p class="entry-title">Taam</p>
+                <p class="entry-org" data-i18n="proj3Org">Restoran platformasi (Startup)</p>
+              </div>
+              <p class="entry-desc" data-i18n="proj3Desc">
+                Oʻzbekistondagi barcha restoranlarni birlashtiradigan CRM dasturi — foydalanuvchi va
+                admin qismlari, chiroyli dizayn bilan.
+              </p>
+              <ul class="project-roles">
+                <li data-i18n="proj3Role1">Jamoa bilan (3 kishilik jamoa) AI Architecture yondashuvida ishlab chiqish</li>
+                <li data-i18n="proj3Role2">Node.js bilan backend ishlari</li>
+                <li data-i18n="proj3Role3">Jamoa bilan ishlash va dizayn koordinatsiyasi</li>
+              </ul>
+            </div>
+
+            <div class="entry">
+              <div>
+                <p class="entry-title">TheWinner</p>
+                <p class="entry-org" data-i18n="proj4Org">Oʻquv markazi ERP tizimi</p>
+              </div>
+              <p class="entry-desc" data-i18n="proj4Desc">
+                Oʻquv markazining barcha jarayonlarini avtomatlashtiradigan tizim — Foydalanuvchi, Admin
+                va Super Admin rollari bilan. Talabalarni qiziqtirish uchun oʻyinlar ham qoʻshilgan.
+              </p>
+              <ul class="project-roles">
+                <li data-i18n="proj4Role1">Toʻliq loyihani ishlab chiqish va boshqarish</li>
+                <li data-i18n="proj4Role2">Multi-level tizim qurilishi</li>
+                <li data-i18n="proj4Role3">Hozir serverga qoʻyilgan va ishlamoqda</li>
+              </ul>
+              <a class="project-link" href="https://the-winner-frontend.vercel.app/" target="_blank" rel="noopener" data-i18n="projLinkDemo">Demo koʻrish ↗</a>
+            </div>
+
+          </div>
+        </section>
+
+        <section>
+          <h2 data-i18n="eduHeading">Taʼlim</h2>
+          <div class="stack">
+            <div class="entry">
+              <div>
+                <p class="entry-title">FullStack Developer</p>
+                <p class="entry-org" data-i18n="eduOrgName">Najot Taʼlim oʻquv markazi</p>
+              </div>
+              <p class="entry-date mono">2026</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 data-i18n="coursesHeading">Malaka oshirish kurslari</h2>
+          <div class="stack">
+            <div class="entry">
+              <div>
+                <p class="entry-title">Full Stack Web Development</p>
+                <p class="entry-org">Najot Taʼlim — Full Stack Developer (Node.js &amp; React)</p>
+              </div>
+              <p class="entry-date mono">2026</p>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 data-i18n="examsHeading">Sinovlar va imtihonlar</h2>
+          <div class="stack">
+            <div class="entry">
+              <div>
+                <p class="entry-title">Full Stack Qualification Exam</p>
+                <p class="entry-org">Najot Taʼlim — Full Stack Web Development</p>
+              </div>
+              <p class="entry-date mono">2025</p>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <footer class="note" data-i18n="footerNote">Rezyume — Shukurov Humoyun · Toshkent, Oʻzbekiston</footer>
+  </div>
+</div>
+
+<script>
+(function(){
+  var STRINGS = {
+    uz: {
+      role: "Fullstack dasturchi",
+      name: "Shukurov Humoyun",
+      updated: "YANGILANGAN 2026-08-30",
+      themeToggleLabel: "Ochiq/qorongʻi rejimni almashtirish",
+      contactCity: "Toshkent, Oʻzbekiston",
+      contactAge: "19 yosh (2007-yil 19-iyun)",
+      eyebrowPersonal: "Shaxsiy maʼlumot",
+      eyebrowWork: "Ish sharoiti",
+      eyebrowLangs: "Tillar",
+      eyebrowSkills: "Koʻnikmalar",
+      dtCitizenship: "Fuqarolik",
+      ddCitizenship: "Oʻzbekiston",
+      dtWorkPermit: "Ish ruxsatnomasi",
+      ddWorkPermit: "Oʻzbekiston",
+      dtSpecialization: "Mutaxassislik",
+      ddSpecialization: "Dasturchi",
+      dtEmploymentType: "Bandlik turi",
+      ddEmploymentType: "Toʻliq va yarim ish kuni, loyiha asosida",
+      dtWorkFormat: "Ish formati",
+      ddWorkFormat: "Ish beruvchi hududida",
+      dtCommute: "Yoʻlga sarf vaqt",
+      ddCommute: "Ahamiyati yoʻq",
+      langNative: "Oʻzbek tili",
+      langNativeLevel: "Ona tili",
+      langEnglish: "Ingliz tili",
+      skillGroupLangs: "Dasturlash tillari",
+      skillGroupDb: "Maʼlumotlar bazasi",
+      skillGroupDevops: "DevOps va vositalar",
+      skillGroupApi: "API va tizimlar",
+      aboutHeading: "Men haqimda",
+      aboutP1: "Full-stack dasturchi (Node.js / React / TypeScript). Tijorat loyihalarini ishlab chiqish, maʼlumotlar bazasini loyihalash va backend xizmatlarini optimallashtirish boʻyicha tajribaga egaman. Shuningdek, dasturlashni oʻrgatish tajribam ham bor.",
+      aboutP2: "Docker, PostgreSQL, NestJS va Tailwind CSS'dan faol foydalanaman. Ishlab chiqishni tezlashtirish, kodni optimallashtirish va promptlar yozish uchun AI vositalaridan samarali foydalanaman. Boshqa odamlarning kodini tez tushunaman, jamoada ishlay olaman va texnik darajamni doimiy oshirib boraman.",
+      expHeading: "Ish tajribasi",
+      expRole: "Mentor",
+      expOrg: "Najot Taʼlim Markazi — Toshkent",
+      expDate: "Aprel 2026 — hozirgi kunga qadar · 5 oy",
+      expIndustry: "Axborot texnologiyalari, tizim integratsiyasi, internet — dasturiy taʼminotni ishlab chiqish",
+      expDesc: "Talabalarga Full Stack dasturlashni (Node.js, Nest.js, Python, SQL) oʻrgatish va amaliy loyihalar boʻyicha mentorlik qilish. Shu bilan birga bir nechta startaplar uchun backend qismini ishlab chiqishda ishtirok etdim. Jamoada samarali ishlash tajribasiga egaman, yangi vazifalarga tez moslashaman va hamkasblar hamda talabalar bilan tez til topisha olaman.",
+      eduHeading: "Taʼlim",
+      eduOrgName: "Najot Taʼlim oʻquv markazi",
+      coursesHeading: "Malaka oshirish kurslari",
+      examsHeading: "Sinovlar va imtihonlar",
+      footerNote: "Rezyume — Shukurov Humoyun · Toshkent, Oʻzbekiston",
+      downloadLabel: "Yuklab olish",
+      downloadAriaLabel: "Rezyumeni PDF sifatida yuklab olish",
+      skillGroupArch: "Arxitektura",
+      eyebrowTraits: "Shaxsiy fazilatlar",
+      trait1: "Tez oʻrganish",
+      trait2: "Muammolarni hal qilish",
+      trait3: "Jamoada ishlash",
+      trait4: "Izlanuvchanlik",
+      trait5: "Kreativ yondashish",
+      trait6: "Oʻziga ishonch",
+      aboutP3: "Najot Taʼlimda 1 yildan beri oʻqib, Full Stack yoʻnalishi boʻyicha 8 oylik amaliy tajriba orttirdim — 4 ta real loyihani boshqargan va 3 kishilik jamoa bilan ishlaganman.",
+      projHeading: "Loyihalar",
+      proj1Org: "Sogʻliqni nazorat qiluvchi platforma",
+      proj1Desc: "Oʻzbekistondagi barcha dorilarni nazorat qiladigan, kundalik sogʻliq yordamchisi. Foydalanuvchilar mutaxassislardan onlayn tavsiyalar ola oladi.",
+      proj1Role1: "Backend API dizayni va API controllerlarni yozish",
+      proj1Role2: "Feature Architecture arxitekturasida loyihani boshqarish",
+      proj2Org: "Qurilish mollari marketplaceʼi",
+      proj2Desc: "Koʻp doʻkonli (multi-vendor) onlayn bozor platformasi — Admin, Doʻkon egasi va Xaridor rollari bilan. Hozirda productionʼda ishlamoqda.",
+      proj2Role1: "Butun loyihani boshqarish (Fullstack)",
+      proj2Role2: "TypeScript bilan yozilgan",
+      proj2Role3: "Backend va Frontend qismlarini toʻliq ishlab chiqish",
+      proj3Org: "Restoran platformasi (Startup)",
+      proj3Desc: "Oʻzbekistondagi barcha restoranlarni birlashtiradigan CRM dasturi — foydalanuvchi va admin qismlari, chiroyli dizayn bilan.",
+      proj3Role1: "Jamoa bilan (3 kishilik jamoa) AI Architecture yondashuvida ishlab chiqish",
+      proj3Role2: "Node.js bilan backend ishlari",
+      proj3Role3: "Jamoa bilan ishlash va dizayn koordinatsiyasi",
+      proj4Org: "Oʻquv markazi ERP tizimi",
+      proj4Desc: "Oʻquv markazining barcha jarayonlarini avtomatlashtiradigan tizim — Foydalanuvchi, Admin va Super Admin rollari bilan. Talabalarni qiziqtirish uchun oʻyinlar ham qoʻshilgan.",
+      proj4Role1: "Toʻliq loyihani ishlab chiqish va boshqarish",
+      proj4Role2: "Multi-level tizim qurilishi",
+      proj4Role3: "Hozir serverga qoʻyilgan va ishlamoqda",
+      projLinkDemo: "Demo koʻrish ↗",
+      projLinkView: "Koʻrish ↗"
+    },
+    ru: {
+      role: "Full-stack разработчик",
+      name: "Shukurov Humoyun",
+      updated: "ОБНОВЛЕНО 2026-08-30",
+      themeToggleLabel: "Переключить светлую/тёмную тему",
+      contactCity: "Ташкент, Узбекистан",
+      contactAge: "19 лет (19 июня 2007 г.)",
+      eyebrowPersonal: "Личная информация",
+      eyebrowWork: "Условия работы",
+      eyebrowLangs: "Языки",
+      eyebrowSkills: "Навыки",
+      dtCitizenship: "Гражданство",
+      ddCitizenship: "Узбекистан",
+      dtWorkPermit: "Разрешение на работу",
+      ddWorkPermit: "Узбекистан",
+      dtSpecialization: "Специальность",
+      ddSpecialization: "Программист",
+      dtEmploymentType: "Тип занятости",
+      ddEmploymentType: "Полная и частичная занятость, проектная работа",
+      dtWorkFormat: "Формат работы",
+      ddWorkFormat: "На территории работодателя",
+      dtCommute: "Время в пути",
+      ddCommute: "Не имеет значения",
+      langNative: "Узбекский язык",
+      langNativeLevel: "Родной язык",
+      langEnglish: "Английский язык",
+      skillGroupLangs: "Языки программирования",
+      skillGroupDb: "Базы данных",
+      skillGroupDevops: "DevOps и инструменты",
+      skillGroupApi: "API и системы",
+      aboutHeading: "Обо мне",
+      aboutP1: "Full-stack разработчик (Node.js / React / TypeScript). Имею опыт коммерческой разработки, проектирования баз данных и оптимизации backend-сервисов. Также имею опыт преподавания программирования.",
+      aboutP2: "Активно использую Docker, PostgreSQL, NestJS и Tailwind CSS. Эффективно применяю AI-инструменты для ускорения разработки, оптимизации кода и составления промптов. Быстро разбираюсь в чужом коде, умею работать в команде и постоянно повышаю свой технический уровень.",
+      expHeading: "Опыт работы",
+      expRole: "Ментор",
+      expOrg: "Учебный центр Najot Taʼlim — Ташкент",
+      expDate: "Апрель 2026 — по настоящее время · 5 мес.",
+      expIndustry: "Информационные технологии, системная интеграция, интернет — разработка программного обеспечения",
+      expDesc: "Обучение студентов Full Stack разработке (Node.js, Nest.js, Python, SQL) и менторство на практических проектах. Параллельно участвовал в разработке серверной части для нескольких стартапов. Имею опыт эффективной командной работы, быстро адаптируюсь к новым задачам и легко нахожу общий язык с коллегами и студентами.",
+      eduHeading: "Образование",
+      eduOrgName: "Учебный центр Najot Taʼlim",
+      coursesHeading: "Курсы повышения квалификации",
+      examsHeading: "Тесты и экзамены",
+      footerNote: "Резюме — Shukurov Humoyun · Ташкент, Узбекистан",
+      downloadLabel: "Скачать",
+      downloadAriaLabel: "Скачать резюме в формате PDF",
+      skillGroupArch: "Архитектура",
+      eyebrowTraits: "Личные качества",
+      trait1: "Быстрая обучаемость",
+      trait2: "Решение проблем",
+      trait3: "Работа в команде",
+      trait4: "Любознательность",
+      trait5: "Креативный подход",
+      trait6: "Уверенность в себе",
+      aboutP3: "Учусь в Najot Taʼlim уже 1 год и имею 8 месяцев практического опыта по направлению Full Stack — руководил 4 реальными проектами и работал в команде из 3 человек.",
+      projHeading: "Проекты",
+      proj1Org: "Платформа контроля здоровья",
+      proj1Desc: "Ежедневный помощник по здоровью, отслеживающий все лекарства в Узбекистане. Пользователи могут получать онлайн-рекомендации от специалистов.",
+      proj1Role1: "Дизайн backend API и написание API-контроллеров",
+      proj1Role2: "Управление проектом в архитектуре Feature Architecture",
+      proj2Org: "Маркетплейс строительных материалов",
+      proj2Desc: "Мультивендорная онлайн-торговая платформа с ролями Админ, Владелец магазина и Покупатель. Сейчас работает в production.",
+      proj2Role1: "Руководство всем проектом (Fullstack)",
+      proj2Role2: "Написан на TypeScript",
+      proj2Role3: "Полная разработка backend- и frontend-частей",
+      proj3Org: "Платформа для ресторанов (стартап)",
+      proj3Desc: "CRM-программа, объединяющая все рестораны Узбекистана — с пользовательской и админ-частями, продуманным дизайном.",
+      proj3Role1: "Разработка в подходе AI Architecture в команде из 3 человек",
+      proj3Role2: "Backend-работы на Node.js",
+      proj3Role3: "Командная работа и координация дизайна",
+      proj4Org: "ERP-система учебного центра",
+      proj4Desc: "Система, автоматизирующая все процессы учебного центра — с ролями Пользователь, Админ и Супер админ. Добавлены игры для вовлечения студентов.",
+      proj4Role1: "Полная разработка и управление проектом",
+      proj4Role2: "Построение многоуровневой системы",
+      proj4Role3: "Сейчас развёрнута на сервере и работает",
+      projLinkDemo: "Смотреть демо ↗",
+      projLinkView: "Смотреть ↗"
+    },
+    en: {
+      role: "Fullstack Developer",
+      name: "Humoyun Shukurov",
+      updated: "UPDATED 2026-08-30",
+      themeToggleLabel: "Toggle light/dark theme",
+      contactCity: "Tashkent, Uzbekistan",
+      contactAge: "19 years old (June 19, 2007)",
+      eyebrowPersonal: "Personal information",
+      eyebrowWork: "Work conditions",
+      eyebrowLangs: "Languages",
+      eyebrowSkills: "Skills",
+      dtCitizenship: "Citizenship",
+      ddCitizenship: "Uzbekistan",
+      dtWorkPermit: "Work permit",
+      ddWorkPermit: "Uzbekistan",
+      dtSpecialization: "Specialization",
+      ddSpecialization: "Developer",
+      dtEmploymentType: "Employment type",
+      ddEmploymentType: "Full-time, part-time, project-based",
+      dtWorkFormat: "Work format",
+      ddWorkFormat: "On-site (employer's location)",
+      dtCommute: "Commute time",
+      ddCommute: "Doesn't matter",
+      langNative: "Uzbek",
+      langNativeLevel: "Native",
+      langEnglish: "English",
+      skillGroupLangs: "Programming languages",
+      skillGroupDb: "Databases",
+      skillGroupDevops: "DevOps & tools",
+      skillGroupApi: "APIs & systems",
+      aboutHeading: "About me",
+      aboutP1: "Full-stack developer (Node.js / React / TypeScript). I have experience in commercial development, database design, and backend service optimization. I also have experience teaching programming.",
+      aboutP2: "I actively use Docker, PostgreSQL, NestJS, and Tailwind CSS. I make effective use of AI tools to speed up development, optimize code, and write prompts. I pick up unfamiliar codebases quickly, work well in a team, and keep improving my technical skills.",
+      expHeading: "Work experience",
+      expRole: "Mentor",
+      expOrg: "Najot Taʼlim Center — Tashkent",
+      expDate: "April 2026 — present · 5 mos.",
+      expIndustry: "Information technology, systems integration, internet — software development",
+      expDesc: "Teaching students Full Stack development (Node.js, Nest.js, Python, SQL) and mentoring them on practical projects. I've also contributed to backend development for several startups. I work effectively in a team, adapt quickly to new tasks, and get along easily with colleagues and students.",
+      eduHeading: "Education",
+      eduOrgName: "Najot Taʼlim training center",
+      coursesHeading: "Professional development courses",
+      examsHeading: "Tests & exams",
+      footerNote: "Resume — Humoyun Shukurov · Tashkent, Uzbekistan",
+      downloadLabel: "Download",
+      downloadAriaLabel: "Download résumé as PDF",
+      skillGroupArch: "Architecture",
+      eyebrowTraits: "Personal qualities",
+      trait1: "Fast learner",
+      trait2: "Problem-solving",
+      trait3: "Teamwork",
+      trait4: "Inquisitive mindset",
+      trait5: "Creative approach",
+      trait6: "Self-confidence",
+      aboutP3: "I've been studying at Najot Taʼlim for 1 year, with 8 months of hands-on Full Stack experience - I've led 4 real projects and worked in a team of 3.",
+      projHeading: "Projects",
+      proj1Org: "Health-monitoring platform",
+      proj1Desc: "A daily health assistant that tracks every medicine available in Uzbekistan. Users can get online recommendations from specialists.",
+      proj1Role1: "Designed the backend API and wrote the API controllers",
+      proj1Role2: "Led the project using a Feature Architecture approach",
+      proj2Org: "Construction materials marketplace",
+      proj2Desc: "A multi-vendor online marketplace with Admin, Store owner, and Buyer roles. Currently live in production.",
+      proj2Role1: "Led the entire project (Fullstack)",
+      proj2Role2: "Built with TypeScript",
+      proj2Role3: "Built out both the backend and frontend end to end",
+      proj3Org: "Restaurant platform (startup)",
+      proj3Desc: "A CRM app bringing together every restaurant in Uzbekistan, with user and admin sections and polished design.",
+      proj3Role1: "Built with a team of 3 using an AI Architecture approach",
+      proj3Role2: "Backend work in Node.js",
+      proj3Role3: "Teamwork and design coordination",
+      proj4Org: "Learning center ERP system",
+      proj4Desc: "A system that automates every process at a learning center, with User, Admin, and Super Admin roles. Games were added to keep students engaged.",
+      proj4Role1: "Built and led the entire project",
+      proj4Role2: "Built a multi-level role system",
+      proj4Role3: "Now deployed on a live server and running",
+      projLinkDemo: "View demo ↗",
+      projLinkView: "View ↗"
+    }
+  };
+
+  var LANG_KEY = 'hs-resume-lang';
+  var langBtns = Array.prototype.slice.call(document.querySelectorAll('.lang-btn'));
+  var indicator = document.querySelector('.lang-indicator');
+
+  function setActiveLangUI(lang){
+    langBtns.forEach(function(b, i){
+      var on = b.getAttribute('data-lang') === lang;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (on && indicator) indicator.style.transform = 'translateX(' + (i * 32) + 'px)';
+    });
+  }
+
+  function applyLang(lang){
+    var dict = STRINGS[lang] || STRINGS.uz;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] !== undefined) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-aria-label');
+      if (dict[key] !== undefined) el.setAttribute('aria-label', dict[key]);
+    });
+    document.documentElement.setAttribute('lang', lang);
+    setActiveLangUI(lang);
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+  }
+
+  var savedLang = null;
+  try { savedLang = localStorage.getItem(LANG_KEY); } catch (e) {}
+  applyLang((savedLang && STRINGS[savedLang]) ? savedLang : 'uz');
+
+  langBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      applyLang(b.getAttribute('data-lang'));
+    });
+  });
+})();
+
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  var STORAGE_KEY = 'hs-resume-theme';
+
+  function systemPrefersDark(){
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function isDarkNow(){
+    var explicit = root.getAttribute('data-theme');
+    if (explicit === 'dark') return true;
+    if (explicit === 'light') return false;
+    return systemPrefersDark();
+  }
+  function reflect(dark){
+    btn.classList.toggle('is-dark', dark);
+    btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  if (saved === 'dark' || saved === 'light') {
+    root.setAttribute('data-theme', saved);
+  }
+  reflect(isDarkNow());
+
+  btn.addEventListener('click', function(){
+    var next = isDarkNow() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+    reflect(next === 'dark');
+  });
+})();
+
+(function(){
+  var btn = document.getElementById('resume-download');
+  if (!btn) return;
+  // A real file-save dialog isn't reliable from a page like this one for
+  // everyone who might open it, so this leans on the browser's own print
+  // dialog instead - every browser's print view offers "Save as PDF" (or
+  // an equivalent) as one of its destinations, and the @media print rules
+  // above already hide the theme/lang/download controls from that output.
+  btn.addEventListener('click', function(){
+    window.print();
+  });
+})();
+</script>
+
+</body>
+</html>
