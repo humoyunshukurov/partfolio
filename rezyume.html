@@ -156,6 +156,45 @@
     background: var(--accent-soft);
   }
 
+  .download-wrap{ position: relative; }
+  .download-menu[hidden]{ display: none; }
+  .download-menu{
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 112px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 20;
+  }
+  .download-menu button{
+    all: unset;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 6px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: .76rem;
+    font-weight: 600;
+    letter-spacing: .03em;
+    color: var(--ink-soft);
+    cursor: pointer;
+    text-align: left;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .download-menu button:hover,
+  .download-menu button:focus-visible{
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+  }
+
   .lang-switch{
     position: relative;
     display: inline-flex;
@@ -244,7 +283,7 @@
   .icon-moon{ color: #1a1e27; opacity: 0; transform: rotate(-45deg) scale(.5); }
   .theme-toggle.is-dark .icon-sun{ opacity: 0; transform: rotate(45deg) scale(.5); }
   .theme-toggle.is-dark .icon-moon{ opacity: 1; transform: rotate(0deg) scale(1); color: #fff; }
-  @media print{ .theme-toggle, .lang-switch, .download-btn{ display: none; } }
+  @media print{ .theme-toggle, .lang-switch, .download-wrap{ display: none; } }
 
   /* ---------- Hero ---------- */
   .hero{
@@ -525,10 +564,17 @@
                 </span>
               </span>
             </button>
-            <button type="button" id="resume-download" class="download-btn" data-i18n-aria-label="downloadAriaLabel" aria-label="Rezyumeni PDF sifatida yuklab olish">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
-              <span data-i18n="downloadLabel">Yuklab olish</span>
-            </button>
+            <div class="download-wrap">
+              <button type="button" id="resume-download" class="download-btn" data-i18n-aria-label="downloadAriaLabel" aria-label="Yuklab olish formatini tanlash" aria-haspopup="true" aria-expanded="false">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+                <span data-i18n="downloadLabel">Yuklab olish</span>
+              </button>
+              <div class="download-menu" id="download-menu" hidden>
+                <button type="button" data-format="pdf">PDF</button>
+                <button type="button" data-format="doc">DOC</button>
+                <button type="button" data-format="txt">TXT</button>
+              </div>
+            </div>
           </div>
           <span class="updated mono" data-i18n="updated">YANGILANGAN 2026-08-30</span>
         </div>
@@ -828,6 +874,7 @@
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
 (function(){
   var STRINGS = {
@@ -876,7 +923,7 @@
       examsHeading: "Sinovlar va imtihonlar",
       footerNote: "Rezyume — Shukurov Humoyun · Toshkent, Oʻzbekiston",
       downloadLabel: "Yuklab olish",
-      downloadAriaLabel: "Rezyumeni PDF sifatida yuklab olish",
+      downloadAriaLabel: "Yuklab olish formatini tanlash",
       skillGroupArch: "Arxitektura",
       eyebrowTraits: "Shaxsiy fazilatlar",
       trait1: "Tez oʻrganish",
@@ -954,7 +1001,7 @@
       examsHeading: "Тесты и экзамены",
       footerNote: "Резюме — Shukurov Humoyun · Ташкент, Узбекистан",
       downloadLabel: "Скачать",
-      downloadAriaLabel: "Скачать резюме в формате PDF",
+      downloadAriaLabel: "Выбрать формат скачивания",
       skillGroupArch: "Архитектура",
       eyebrowTraits: "Личные качества",
       trait1: "Быстрая обучаемость",
@@ -1032,7 +1079,7 @@
       examsHeading: "Tests & exams",
       footerNote: "Resume — Humoyun Shukurov · Tashkent, Uzbekistan",
       downloadLabel: "Download",
-      downloadAriaLabel: "Download résumé as PDF",
+      downloadAriaLabel: "Choose a download format",
       skillGroupArch: "Architecture",
       eyebrowTraits: "Personal qualities",
       trait1: "Fast learner",
@@ -1142,15 +1189,346 @@
 })();
 
 (function(){
+  var wrap = document.querySelector('.download-wrap');
   var btn = document.getElementById('resume-download');
-  if (!btn) return;
-  // A real file-save dialog isn't reliable from a page like this one for
-  // everyone who might open it, so this leans on the browser's own print
-  // dialog instead - every browser's print view offers "Save as PDF" (or
-  // an equivalent) as one of its destinations, and the @media print rules
-  // above already hide the theme/lang/download controls from that output.
-  btn.addEventListener('click', function(){
-    window.print();
+  var menu = document.getElementById('download-menu');
+  if (!wrap || !btn || !menu) return;
+
+  // ---------- dropdown open/close ----------
+  function closeMenu(){
+    menu.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+  }
+  function openMenu(){
+    menu.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+  }
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (menu.hidden) openMenu(); else closeMenu();
+  });
+  document.addEventListener('click', function(e){
+    if (!wrap.contains(e.target)) closeMenu();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // ---------- pull organized content straight off the live page ----------
+  // Reads whichever language is currently on screen, so every exported
+  // file always matches what the visitor is actually looking at. The
+  // export files reflow this into a clean, linear document - they don't
+  // try to reproduce the two-column card layout.
+  function text(el){
+    return el ? el.textContent.replace(/\s+/g, ' ').trim() : '';
+  }
+
+  function extractResume(){
+    var data = { name: text(document.querySelector('.name')), role: text(document.querySelector('.role')), contact: [], sidebar: [], sections: [] };
+
+    document.querySelectorAll('.contact-strip > span').forEach(function(span){
+      if (span.classList.contains('sep')) return;
+      var t = text(span);
+      if (t) data.contact.push(t);
+    });
+
+    document.querySelectorAll('.sidebar .side-block').forEach(function(block){
+      var heading = text(block.querySelector('.eyebrow'));
+      var lines = [];
+
+      block.querySelectorAll(':scope > dl .row').forEach(function(row){
+        var dt = text(row.querySelector('dt'));
+        var dd = text(row.querySelector('dd'));
+        if (dt || dd) lines.push(dt + (dt && dd ? ': ' : '') + dd);
+      });
+
+      block.querySelectorAll(':scope > .lang-row').forEach(function(row){
+        var name = text(row.querySelector('.lang-name'));
+        var level = text(row.querySelector('.lang-level'));
+        if (name) lines.push(level ? (name + ' - ' + level) : name);
+      });
+
+      var skillGroups = block.querySelectorAll('.skill-group');
+      if (skillGroups.length) {
+        skillGroups.forEach(function(group){
+          var h4 = text(group.querySelector('h4'));
+          var tags = Array.prototype.map.call(group.querySelectorAll('.tag'), text).filter(Boolean).join(', ');
+          if (tags) lines.push((h4 ? h4 + ': ' : '') + tags);
+        });
+      } else {
+        var directTags = block.querySelectorAll(':scope > .tags .tag');
+        if (directTags.length) {
+          lines.push(Array.prototype.map.call(directTags, text).filter(Boolean).join(', '));
+        }
+      }
+
+      if (heading || lines.length) data.sidebar.push({ heading: heading, lines: lines });
+    });
+
+    document.querySelectorAll('main.content > section').forEach(function(section){
+      var heading = text(section.querySelector('h2'));
+      var entryData = { heading: heading, paragraphs: [], entries: [] };
+
+      section.querySelectorAll(':scope > .about p, :scope.about > p').forEach(function(p){
+        var t = text(p);
+        if (t) entryData.paragraphs.push(t);
+      });
+
+      section.querySelectorAll('.stack .entry').forEach(function(entry){
+        var linkEl = entry.querySelector('.project-link');
+        entryData.entries.push({
+          title: text(entry.querySelector('.entry-title')),
+          org: text(entry.querySelector('.entry-org')),
+          date: text(entry.querySelector('.entry-date')),
+          industry: text(entry.querySelector('.entry-industry')),
+          desc: text(entry.querySelector('.entry-desc')),
+          roles: Array.prototype.map.call(entry.querySelectorAll('.project-roles li'), text).filter(Boolean),
+          link: linkEl ? linkEl.href : null
+        });
+      });
+
+      if (heading || entryData.paragraphs.length || entryData.entries.length) data.sections.push(entryData);
+    });
+
+    return data;
+  }
+
+  function fileBaseName(data){
+    return (data.name || 'Rezyume').replace(/\s+/g, '_');
+  }
+
+  function downloadBlob(content, filename, mime){
+    var blob = new Blob([content], { type: mime });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  // ---------- TXT ----------
+  function buildPlainText(data){
+    var out = [];
+    out.push(data.name);
+    if (data.role) out.push(data.role);
+    if (data.contact.length) { out.push(''); out.push(data.contact.join('  |  ')); }
+
+    data.sidebar.forEach(function(block){
+      out.push('');
+      out.push((block.heading || '').toUpperCase());
+      out.push('-'.repeat(Math.max(3, (block.heading || '').length)));
+      block.lines.forEach(function(l){ out.push('- ' + l); });
+    });
+
+    data.sections.forEach(function(section){
+      out.push('');
+      out.push((section.heading || '').toUpperCase());
+      out.push('='.repeat(Math.max(3, (section.heading || '').length)));
+      section.paragraphs.forEach(function(p){ out.push(''); out.push(p); });
+      section.entries.forEach(function(e){
+        out.push('');
+        var line = e.title;
+        if (e.org) line += '  -  ' + e.org;
+        if (e.date) line += '  (' + e.date + ')';
+        out.push(line);
+        if (e.industry) out.push(e.industry);
+        if (e.desc) out.push(e.desc);
+        e.roles.forEach(function(r){ out.push('  * ' + r); });
+        if (e.link) out.push(e.link);
+      });
+    });
+
+    return out.join('\n');
+  }
+
+  function exportTxt(data){
+    downloadBlob(buildPlainText(data), fileBaseName(data) + '.txt', 'text/plain;charset=utf-8');
+  }
+
+  // ---------- DOC (Word-compatible HTML, opens natively in Word) ----------
+  function buildWordHtml(data){
+    var body = '';
+    body += '<h1 style="font-family:Calibri,Arial,sans-serif;margin-bottom:0;">' + escapeHtml(data.name) + '</h1>';
+    if (data.role) body += '<p style="color:#0e6e5c;font-weight:bold;margin-top:4px;">' + escapeHtml(data.role) + '</p>';
+    if (data.contact.length) body += '<p style="color:#444;">' + escapeHtml(data.contact.join('   |   ')) + '</p>';
+    body += '<hr/>';
+
+    data.sidebar.forEach(function(block){
+      if (block.heading) body += '<h3 style="color:#0a5647;margin-bottom:6px;">' + escapeHtml(block.heading) + '</h3>';
+      if (block.lines.length) {
+        body += '<ul>';
+        block.lines.forEach(function(l){ body += '<li>' + escapeHtml(l) + '</li>'; });
+        body += '</ul>';
+      }
+    });
+
+    data.sections.forEach(function(section){
+      if (section.heading) body += '<h2 style="color:#0a5647;margin-top:22px;">' + escapeHtml(section.heading) + '</h2>';
+      section.paragraphs.forEach(function(p){ body += '<p>' + escapeHtml(p) + '</p>'; });
+      section.entries.forEach(function(e){
+        var line = '<b>' + escapeHtml(e.title) + '</b>';
+        if (e.org) line += ' &mdash; ' + escapeHtml(e.org);
+        if (e.date) line += ' <span style="color:#777;">(' + escapeHtml(e.date) + ')</span>';
+        body += '<p style="margin-bottom:2px;">' + line + '</p>';
+        if (e.industry) body += '<p style="color:#777;font-size:90%;margin-top:0;">' + escapeHtml(e.industry) + '</p>';
+        if (e.desc) body += '<p>' + escapeHtml(e.desc) + '</p>';
+        if (e.roles.length) {
+          body += '<ul>';
+          e.roles.forEach(function(r){ body += '<li>' + escapeHtml(r) + '</li>'; });
+          body += '</ul>';
+        }
+        if (e.link) body += '<p><a href="' + escapeHtml(e.link) + '">' + escapeHtml(e.link) + '</a></p>';
+      });
+    });
+
+    return '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">' +
+      '<head><meta charset="utf-8"><title>' + escapeHtml(data.name) + '</title></head>' +
+      '<body style="font-family:Calibri,Arial,sans-serif;font-size:11pt;">' + body + '</body></html>';
+  }
+
+  function exportDoc(data){
+    downloadBlob(buildWordHtml(data), fileBaseName(data) + '.doc', 'application/msword');
+  }
+
+  // ---------- PDF (built directly, not a print-to-PDF screenshot) ----------
+  // jsPDF's built-in fonts are Latin-only, so the Russian variant would
+  // render as garbage without a real font embedded. Roboto covers Cyrillic
+  // too, and it's only fetched (once, then cached) when a PDF is actually
+  // requested, so browsing the page never pays for it.
+  var pdfFontCache = {};
+  function loadPdfFontBase64(url){
+    if (pdfFontCache[url]) return Promise.resolve(pdfFontCache[url]);
+    return fetch(url).then(function(res){ return res.arrayBuffer(); }).then(function(buf){
+      var bytes = new Uint8Array(buf);
+      var binary = '';
+      var chunk = 0x8000;
+      for (var i = 0; i < bytes.length; i += chunk) {
+        binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunk));
+      }
+      var b64 = btoa(binary);
+      pdfFontCache[url] = b64;
+      return b64;
+    });
+  }
+
+  async function exportPdf(data){
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+      // CDN didn't load for some reason - fall back to the browser's own
+      // print dialog rather than doing nothing.
+      window.print();
+      return;
+    }
+    var jsPDF = window.jspdf.jsPDF;
+    var doc = new jsPDF({ unit: 'pt', format: 'a4' });
+
+    var fontFamily = 'helvetica';
+    try {
+      var regular = await loadPdfFontBase64('/fonts/Roboto-Regular.ttf');
+      var bold = await loadPdfFontBase64('/fonts/Roboto-Bold.ttf');
+      doc.addFileToVFS('Roboto-Regular.ttf', regular);
+      doc.addFont('Roboto-Regular.ttf', 'Roboto', 'normal');
+      doc.addFileToVFS('Roboto-Bold.ttf', bold);
+      doc.addFont('Roboto-Bold.ttf', 'Roboto', 'bold');
+      fontFamily = 'Roboto';
+    } catch (e) {
+      // Offline or the font failed to fetch - fall back to the built-in
+      // Latin-only font rather than failing the whole export.
+    }
+
+    var margin = 48;
+    var pageWidth = doc.internal.pageSize.getWidth();
+    var pageHeight = doc.internal.pageSize.getHeight();
+    var maxWidth = pageWidth - margin * 2;
+    var y = margin;
+
+    function ensureSpace(extra){
+      if (y + extra > pageHeight - margin) {
+        doc.addPage();
+        y = margin;
+      }
+    }
+    // jsPDF's built-in fonts only cover WinAnsi (Latin-1-ish) code points -
+    // the Uzbek modifier letters (ʻ/ʼ, U+02BB/U+02BC) used throughout the
+    // source text fall outside that and would otherwise render as garbage
+    // (each silently truncates to a stray »/¼). Swap them for a plain
+    // apostrophe so the PDF reads correctly.
+    function sanitizeForPdf(str){
+      return String(str).replace(/[ʻʼ‘’]/g, "'");
+    }
+
+    function addLines(str, size, bold, indent){
+      indent = indent || 0;
+      doc.setFont(fontFamily, bold ? 'bold' : 'normal');
+      doc.setFontSize(size);
+      var lineHeight = size * 1.28;
+      var lines = doc.splitTextToSize(sanitizeForPdf(str), maxWidth - indent);
+      lines.forEach(function(line){
+        ensureSpace(lineHeight);
+        doc.text(line, margin + indent, y);
+        y += lineHeight;
+      });
+    }
+    function gap(px){ y += px; }
+    function rule(){
+      ensureSpace(10);
+      doc.setDrawColor(210, 214, 222);
+      doc.line(margin, y, pageWidth - margin, y);
+      gap(14);
+    }
+
+    doc.setTextColor(20, 24, 32);
+    addLines(data.name, 19, true);
+    if (data.role) { doc.setTextColor(14, 110, 92); addLines(data.role, 12, true); doc.setTextColor(20, 24, 32); }
+    gap(4);
+    if (data.contact.length) addLines(data.contact.join('   |   '), 9, false);
+    gap(10);
+    rule();
+
+    data.sidebar.forEach(function(block){
+      if (block.heading) addLines(block.heading.toUpperCase(), 10.5, true);
+      block.lines.forEach(function(l){ addLines('- ' + l, 9.5, false, 10); });
+      gap(10);
+    });
+
+    rule();
+
+    data.sections.forEach(function(section){
+      if (section.heading) addLines(section.heading, 13.5, true);
+      gap(2);
+      section.paragraphs.forEach(function(p){ addLines(p, 10, false); gap(6); });
+      section.entries.forEach(function(e){
+        var line = e.title || '';
+        if (e.org) line += (line ? '  -  ' : '') + e.org;
+        if (e.date) line += '  (' + e.date + ')';
+        addLines(line, 11, true);
+        if (e.industry) addLines(e.industry, 8.5, false);
+        if (e.desc) addLines(e.desc, 10, false);
+        e.roles.forEach(function(r){ addLines('- ' + r, 9.5, false, 10); });
+        if (e.link) { doc.setTextColor(14, 110, 92); addLines(e.link, 9.5, false); doc.setTextColor(20, 24, 32); }
+        gap(8);
+      });
+      gap(6);
+    });
+
+    doc.save(fileBaseName(data) + '.pdf');
+  }
+
+  menu.querySelectorAll('button[data-format]').forEach(function(b){
+    b.addEventListener('click', function(){
+      closeMenu();
+      var data = extractResume();
+      var fmt = b.getAttribute('data-format');
+      if (fmt === 'pdf') Promise.resolve(exportPdf(data)).catch(function(){ window.print(); });
+      else if (fmt === 'doc') exportDoc(data);
+      else if (fmt === 'txt') exportTxt(data);
+    });
   });
 })();
 </script>
