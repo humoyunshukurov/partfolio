@@ -41,9 +41,40 @@
     --shadow-lg: 0 24px 48px -28px rgba(28,28,26,.22);
     --glow: 0 10px 30px -8px rgba(14,110,92,.4);
   }
-  /* Ataylab qorong'i rejim yo'q - sayt tizim sozlamasidan qat'iy nazar
-     doim yoqimli oq/yorug' ko'rinishda qoladi (foydalanuvchi tanlovi
-     bilan tasdiqlangan). */
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #171712;
+      --surface: #1f1f19;
+      --surface-alt: #27261f;
+      --ink: #f1efe6;
+      --ink-soft: #b0ac9f;
+      --ink-faint: #83806f;
+      --line: #363528;
+      --accent: #3fcaa8;
+      --accent-ink: #8fe9cf;
+      --accent-soft: #1c2f2a;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,.35);
+      --shadow-md: 0 16px 32px -18px rgba(0,0,0,.55);
+      --shadow-lg: 0 28px 52px -30px rgba(0,0,0,.65);
+      --glow: 0 10px 30px -8px rgba(63,202,168,.35);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #171712;
+    --surface: #1f1f19;
+    --surface-alt: #27261f;
+    --ink: #f1efe6;
+    --ink-soft: #b0ac9f;
+    --ink-faint: #83806f;
+    --line: #363528;
+    --accent: #3fcaa8;
+    --accent-ink: #8fe9cf;
+    --accent-soft: #1c2f2a;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.35);
+    --shadow-md: 0 16px 32px -18px rgba(0,0,0,.55);
+    --shadow-lg: 0 28px 52px -30px rgba(0,0,0,.65);
+    --glow: 0 10px 30px -8px rgba(63,202,168,.35);
+  }
 
   *{ box-sizing: border-box; }
   html{
@@ -132,6 +163,57 @@
     -webkit-tap-highlight-color: transparent;
   }
   .lang-btn.active{ color: #fff; }
+
+  /* ---------- Theme toggle ---------- */
+  .theme-toggle{
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .theme-toggle-track{
+    display: flex;
+    align-items: center;
+    width: 50px;
+    height: 28px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    border: 1px solid var(--line);
+    padding: 3px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.06);
+    transition: background .25s ease, border-color .25s ease;
+  }
+  .theme-toggle.is-dark .theme-toggle-track{
+    background: color-mix(in srgb, var(--accent) 26%, var(--surface-alt));
+    border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  }
+  .theme-toggle-thumb{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--surface);
+    box-shadow: 0 2px 5px rgba(0,0,0,.2);
+    transform: translateX(0);
+    transition: transform .32s cubic-bezier(.16,1,.3,1);
+  }
+  .theme-toggle.is-dark .theme-toggle-thumb{
+    transform: translateX(22px);
+    background: var(--accent);
+  }
+  .theme-toggle-thumb svg{
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 12px; height: 12px;
+    margin: -6px 0 0 -6px;
+    transition: opacity .2s ease, transform .32s cubic-bezier(.16,1,.3,1);
+  }
+  .icon-sun{ color: #d98c1f; opacity: 1; transform: rotate(0deg) scale(1); }
+  .icon-moon{ color: #1a1e27; opacity: 0; transform: rotate(-45deg) scale(.5); }
+  .theme-toggle.is-dark .icon-sun{ opacity: 0; transform: rotate(45deg) scale(.5); }
+  .theme-toggle.is-dark .icon-moon{ opacity: 1; transform: rotate(0deg) scale(1); color: #fff; }
 
   /* ---------- Reveal-on-scroll (progressive enhancement, safe fallback) ---------- */
   @supports (animation-timeline: view()) {
@@ -660,6 +742,14 @@
         <button type="button" class="lang-btn" data-lang="ru">RU</button>
         <button type="button" class="lang-btn" data-lang="en">EN</button>
       </div>
+      <button type="button" id="theme-toggle" class="theme-toggle" data-i18n-aria-label="themeToggleLabel" aria-label="Ochiq/qorongʻi rejimni almashtirish" aria-pressed="false">
+        <span class="theme-toggle-track">
+          <span class="theme-toggle-thumb">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 14.7A8.6 8.6 0 1 1 9.3 3.6a7 7 0 0 0 11.1 11.1Z"/></svg>
+          </span>
+        </span>
+      </button>
       <a class="nav-cta" href="/rezyume.html" data-i18n="navResume">Rezyume ↗</a>
     </div>
   </div>
@@ -863,6 +953,7 @@
 (function(){
   var STRINGS = {
     uz: {
+      themeToggleLabel: "Ochiq/qorongʻi rejimni almashtirish",
       navHome: "Bosh sahifa",
       navAbout: "Men haqimda",
       navProjects: "Loyihalar",
@@ -906,6 +997,7 @@
       project4Desc: "Oʻzbekistondagi barcha dorilarni nazorat qiladigan, kundalik sogʻliq yordamchisi — mutaxassislardan onlayn tavsiyalar va AI yordamchisi bilan."
     },
     ru: {
+      themeToggleLabel: "Переключить светлую/тёмную тему",
       navHome: "Главная",
       navAbout: "Обо мне",
       navProjects: "Проекты",
@@ -949,6 +1041,7 @@
       project4Desc: "Ежедневный помощник по здоровью, отслеживающий все лекарства в Узбекистане — с онлайн-рекомендациями специалистов и AI-помощником."
     },
     en: {
+      themeToggleLabel: "Toggle light/dark theme",
       navHome: "Home",
       navAbout: "About",
       navProjects: "Projects",
@@ -1031,6 +1124,41 @@
     });
   });
 
+})();
+
+(function(){
+  var root = document.documentElement;
+  var btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  var STORAGE_KEY = 'hs-site-theme';
+
+  function systemPrefersDark(){
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function isDarkNow(){
+    var explicit = root.getAttribute('data-theme');
+    if (explicit === 'dark') return true;
+    if (explicit === 'light') return false;
+    return systemPrefersDark();
+  }
+  function reflect(dark){
+    btn.classList.toggle('is-dark', dark);
+    btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  if (saved === 'dark' || saved === 'light') {
+    root.setAttribute('data-theme', saved);
+  }
+  reflect(isDarkNow());
+
+  btn.addEventListener('click', function(){
+    var next = isDarkNow() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(STORAGE_KEY, next); } catch (e) {}
+    reflect(next === 'dark');
+  });
 })();
 </script>
 </body>
