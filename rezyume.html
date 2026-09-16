@@ -560,7 +560,7 @@
     .sheet{ box-shadow: none; border: none; border-radius: 0; }
     .sheet::before{ display: none; }
     .sidebar{ background: #f4f6f9; }
-    .aurora, .scroll-progress, .hero-terminal{ display: none !important; }
+    .aurora, .scroll-progress{ display: none !important; }
     .reveal{ opacity: 1 !important; transform: none !important; transition: none !important; }
   }
 
@@ -621,55 +621,6 @@
     transition: opacity .6s ease, transform .6s ease;
   }
   .reveal.is-visible{ opacity: 1; transform: none; }
-
-  /* ---------- Hero terminal ---------- */
-  .hero-terminal{
-    margin-top: 6px;
-    border-radius: 10px;
-    background: #0d1117;
-    border: 1px solid rgba(255,255,255,.08);
-    box-shadow: 0 24px 48px -28px rgba(0,0,0,.55);
-    overflow: hidden;
-  }
-  .term-bar{
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    padding: 9px 12px;
-    background: #161b22;
-    border-bottom: 1px solid rgba(255,255,255,.06);
-  }
-  .term-dot{ width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .term-dot.red{ background: #ff5f56; }
-  .term-dot.yellow{ background: #ffbd2e; }
-  .term-dot.green{ background: #27c93f; }
-  .term-title{
-    margin-left: 8px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: .7rem;
-    color: #8b949e;
-  }
-  .term-body{
-    padding: 16px 18px 20px;
-    font-family: "IBM Plex Mono", monospace;
-    font-size: .82rem;
-    line-height: 1.7;
-    color: #c9d1d9;
-    min-height: 172px;
-  }
-  .term-row{ white-space: pre-wrap; word-break: break-word; }
-  .term-prompt{ color: #3fcaa8; margin-right: 7px; }
-  .term-out{ color: #8b949e; padding-left: 2px; }
-  .term-cursor{
-    display: inline-block;
-    width: 7px;
-    height: 1em;
-    background: #3fcaa8;
-    vertical-align: -2px;
-    margin-left: 2px;
-    animation: termBlink 1s step-end infinite;
-  }
-  @keyframes termBlink{ 50%{ opacity: 0; } }
 </style>
 
 <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
@@ -731,14 +682,6 @@
         <span><a href="https://github.com/humoyunshukurov" target="_blank" rel="noopener">github.com/humoyunshukurov</a></span>
         <span class="sep">·</span>
         <span data-i18n="contactAge">19 yosh (2007-yil 19-iyun)</span>
-      </div>
-
-      <div class="hero-terminal" aria-hidden="true">
-        <div class="term-bar">
-          <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
-          <span class="term-title">humoyun@fullstack:~</span>
-        </div>
-        <div class="term-body" id="term-body"></div>
       </div>
     </header>
 
@@ -1287,7 +1230,6 @@
     document.documentElement.setAttribute('lang', lang);
     setActiveLangUI(lang);
     try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
-    if (window.restartHeroTerminal) window.restartHeroTerminal();
   }
 
   var savedLang = null;
@@ -1678,86 +1620,6 @@
       else if (fmt === 'txt') exportTxt(data);
     });
   });
-})();
-
-(function(){
-  var body = document.getElementById('term-body');
-  if (!body) return;
-  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var runToken = 0;
-
-  function script(){
-    var name = (document.querySelector('.name') || {}).textContent || 'Shukurov Humoyun';
-    var role = (document.querySelector('.role') || {}).textContent || 'Fullstack dasturchi';
-    return [
-      { cmd: 'whoami' },
-      { out: [name.trim() + ' — ' + role.trim()] },
-      { cmd: 'cat stack.json' },
-      { out: [
-          'frontend  : React, Next.js, TypeScript',
-          'backend   : Node.js, Express, NestJS',
-          'database  : PostgreSQL, MySQL',
-          'devops    : Docker, Git, Linux'
-        ] },
-      { cmd: 'echo $STATUS' },
-      { out: ['Open to new full-stack projects ✓'] }
-    ];
-  }
-
-  function typeLine(el, text, cb){
-    if (reduceMotion) { el.textContent = text; cb(); return; }
-    var i = 0;
-    (function step(){
-      el.textContent = text.slice(0, i);
-      i++;
-      if (i <= text.length) { setTimeout(step, 22 + Math.random() * 26); }
-      else { cb(); }
-    })();
-  }
-
-  function run(){
-    var token = ++runToken;
-    body.innerHTML = '';
-    var lines = script();
-    var idx = 0;
-
-    function next(){
-      if (token !== runToken) return; // a newer run superseded this one
-      if (idx >= lines.length) return;
-      var item = lines[idx++];
-      var row = document.createElement('div');
-      row.className = 'term-row';
-      body.appendChild(row);
-
-      if (item.cmd) {
-        var prompt = document.createElement('span');
-        prompt.className = 'term-prompt';
-        prompt.textContent = '$';
-        var typed = document.createElement('span');
-        var cursor = document.createElement('span');
-        cursor.className = 'term-cursor';
-        row.appendChild(prompt);
-        row.appendChild(typed);
-        row.appendChild(cursor);
-        typeLine(typed, item.cmd, function(){
-          cursor.remove();
-          setTimeout(next, 220);
-        });
-      } else {
-        item.out.forEach(function(line, i){
-          var outRow = i === 0 ? row : document.createElement('div');
-          outRow.className = 'term-row term-out';
-          if (i > 0) body.appendChild(outRow);
-          outRow.textContent = line;
-        });
-        setTimeout(next, 260);
-      }
-    }
-    next();
-  }
-
-  window.restartHeroTerminal = run;
-  run();
 })();
 
 (function(){
