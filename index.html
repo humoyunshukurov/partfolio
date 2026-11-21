@@ -546,7 +546,7 @@
     </div>
 
     <div class="project-grid" id="project-grid">
-      <a class="project-card surface-cyan reveal" data-cats="Fullstack AI" href="https://magi-frontend-tau.vercel.app" target="_blank" rel="noopener">
+      <a class="project-card surface-cyan reveal" data-cats="Fullstack AI" href="/magi.html">
         <div class="project-thumb"><img src="/projects/project-magi.jpg" alt="MAGI loyihasining koʻrinishi" loading="lazy" width="1024" height="640"></div>
         <div class="project-body">
           <div class="project-meta"><span class="cat">Fullstack</span><span>2026</span></div>
@@ -555,7 +555,8 @@
           <div class="project-foot">
             <p class="project-stack">Node.js · Express · PostgreSQL · Next.js · TypeScript · OpenAI</p>
             <div class="project-links">
-              <span class="mono" data-i18n="visitLabel">Saytni koʻrish ↗</span>
+              <span class="mono" data-i18n="detailsLabel">Batafsil →</span>
+              <span class="mono" data-i18n="privateLabel">Sotilgan loyiha · havola yopiq</span>
             </div>
           </div>
         </div>
@@ -627,13 +628,13 @@
         <div class="project-thumb"><img src="/projects/project-biznes-erp.jpg" alt="Biznes ERP loyihasining koʻrinishi" loading="lazy" width="1024" height="640"></div>
         <div class="project-body">
           <div class="project-meta"><span class="cat">Fullstack</span><span>2026</span></div>
-          <h3 class="project-title">Biznes ERP<span class="sub" data-i18n="startupSub">(Startap)</span></h3>
+          <h3 class="project-title">Biznes ERP</h3>
           <p class="project-desc" data-i18n="project6Desc">Doʻkon va kichik bizneslar uchun ERP tizimi: kassa (POS), ombor va shtrix-kodlar, sotuv va mijozlar, yetkazib beruvchilar, moliya, onlayn doʻkon va obuna asosidagi mijozlarni boshqarish paneli.</p>
           <div class="project-foot">
             <p class="project-stack">NestJS · Prisma · PostgreSQL · React · TypeScript</p>
             <div class="project-links">
               <span class="mono" data-i18n="detailsLabel">Batafsil →</span>
-              <span class="mono" data-i18n="privateLabel">Startap · havola yopiq</span>
+              <span class="mono" data-i18n="privateLabel">Sotilgan loyiha · havola yopiq</span>
             </div>
           </div>
         </div>
@@ -816,7 +817,7 @@
       project5Desc: "Universitet va oʻquv markazlari uchun imtihon va oʻquv jarayonini boshqarish platformasi: guruhlar, dars jadvali, imtihon va uy vazifalari, avtomatik baholash, reyting va bildirishnomalar. Oʻqituvchi va direktor uchun admin panel hamda imtihon tuzish, maʼlumotlarni toʻldirishda yordam beradigan Magi AI yordamchisi bor.",
       project6Desc: "Doʻkon va kichik bizneslar uchun ERP tizimi: kassa (POS), ombor va shtrix-kodlar, sotuv va mijozlar, yetkazib beruvchilar, moliya, onlayn doʻkon va obuna asosidagi mijozlarni boshqarish paneli.",
       detailsLabel: "Batafsil →",
-      privateLabel: "Startap · havola yopiq",
+      privateLabel: "Sotilgan loyiha · havola yopiq",
       startupSub: "(Startap)",
       visitLabel: "Saytni koʻrish ↗",
       codeLabel: "Kod · GitHub",
@@ -903,7 +904,7 @@
       project5Desc: "Платформа для управления экзаменами и учебным процессом в университетах и учебных центрах: группы, расписание, экзамены и домашние задания, автоматическая оценка, рейтинг и уведомления. Есть админ-панель для преподавателей и директора, а также ИИ-помощник Magi AI, который помогает составлять экзамены и заполнять данные.",
       project6Desc: "ERP-система для магазинов и малого бизнеса: касса (POS), склад и штрихкоды, продажи и клиенты, поставщики, финансы, онлайн-магазин и панель управления клиентами по подписке.",
       detailsLabel: "Подробнее →",
-      privateLabel: "Стартап · ссылка закрыта",
+      privateLabel: "Проданный проект · ссылка закрыта",
       startupSub: "(Стартап)",
       visitLabel: "Смотреть сайт ↗",
       codeLabel: "Код · GitHub",
@@ -990,7 +991,7 @@
       project5Desc: "An exam and learning management platform for universities and learning centers: groups, class timetables, exams and homework, automatic grading, rankings, and notifications. Includes an admin panel for teachers and directors, plus Magi AI, an assistant that helps build exams and fill in data.",
       project6Desc: "An ERP system for shops and small businesses: point of sale, inventory with barcodes, sales and customers, suppliers, finance, an online store, and a panel for managing subscription clients.",
       detailsLabel: "Details →",
-      privateLabel: "Startup · link private",
+      privateLabel: "Sold project · link private",
       startupSub: "(Startup)",
       visitLabel: "Visit site ↗",
       codeLabel: "Code · GitHub",
@@ -1215,23 +1216,27 @@
     submitBtn.disabled = true;
     submitBtn.textContent = dict.formSending || 'Sending...';
 
-    fetch(SUPABASE_URL + '/rest/v1/contact_messages', {
+    // saved in supabase as before and sent to telegram, either one is enough
+    var payload = JSON.stringify({ name: name, email: email, message: message });
+    var saved = fetch(SUPABASE_URL + '/rest/v1/contact_messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'apikey': SUPABASE_KEY,
         'Prefer': 'return=minimal'
       },
-      body: JSON.stringify({ name: name, email: email, message: message })
-    }).then(function(res){
+      body: payload
+    }).then(function(res){ return res.ok; }).catch(function(){ return false; });
+    var sent = fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: payload
+    }).then(function(res){ return res.ok; }).catch(function(){ return false; });
+
+    Promise.all([saved, sent]).then(function(r){
       submitBtn.disabled = false;
       submitBtn.textContent = dict.formSubmit || 'Send';
-      if (!res.ok) throw new Error('request failed');
-      showResult('sent');
-    }).catch(function(){
-      submitBtn.disabled = false;
-      submitBtn.textContent = dict.formSubmit || 'Send';
-      showResult('error');
+      showResult(r[0] || r[1] ? 'sent' : 'error');
     });
   });
 })();

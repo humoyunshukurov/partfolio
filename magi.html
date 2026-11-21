@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="MAGI — universitet uchun imtihon va oʻquv platformasi. Shukurov Humoyun loyihasi.">
+<title>MAGI · Humoyun Shukurov</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23d6432f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<script>
+  try { var t = localStorage.getItem('hs-site-theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+<style>
+  :root{
+    --paper: oklch(0.951 0.017 85.2);
+    --paper-foreground: oklch(0.196 0.011 62);
+    --ink: oklch(0.196 0.011 62);
+    --ink-foreground: oklch(0.951 0.017 85.2);
+    --line: oklch(0.196 0.011 62);
+    --crimson: oklch(0.583 0.216 21.9);
+    --crimson-foreground: oklch(0.966 0.014 85.2);
+    --gold: oklch(0.796 0.144 76.4);
+    --gold-foreground: oklch(0.196 0.011 62);
+    --cyan: oklch(0.694 0.107 199.1);
+    --cyan-foreground: oklch(0.196 0.011 62);
+    --plum: oklch(0.376 0.126 315.6);
+    --plum-foreground: oklch(0.966 0.014 85.2);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: oklch(0.183 0.008 62);
+      --paper-foreground: oklch(0.941 0.014 85.2);
+      --ink: oklch(0.126 0.006 62);
+      --ink-foreground: oklch(0.941 0.014 85.2);
+      --line: oklch(0.372 0.01 62);
+      --crimson: oklch(0.63 0.203 21.9);
+      --crimson-foreground: oklch(0.98 0.01 85.2);
+      --gold: oklch(0.812 0.14 76.4);
+      --gold-foreground: oklch(0.14 0.008 62);
+      --cyan: oklch(0.73 0.104 199.1);
+      --cyan-foreground: oklch(0.14 0.008 62);
+      --plum: oklch(0.44 0.132 315.6);
+      --plum-foreground: oklch(0.98 0.01 85.2);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: oklch(0.183 0.008 62);
+    --paper-foreground: oklch(0.941 0.014 85.2);
+    --ink: oklch(0.126 0.006 62);
+    --ink-foreground: oklch(0.941 0.014 85.2);
+    --line: oklch(0.372 0.01 62);
+    --crimson: oklch(0.63 0.203 21.9);
+    --crimson-foreground: oklch(0.98 0.01 85.2);
+    --gold: oklch(0.812 0.14 76.4);
+    --gold-foreground: oklch(0.14 0.008 62);
+    --cyan: oklch(0.73 0.104 199.1);
+    --cyan-foreground: oklch(0.14 0.008 62);
+    --plum: oklch(0.44 0.132 315.6);
+    --plum-foreground: oklch(0.98 0.01 85.2);
+  }
+  *{ box-sizing: border-box; }
+  body{ margin: 0; background: var(--paper); color: var(--paper-foreground); font-family: "Space Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  img{ max-width: 100%; display: block; }
+  a{ color: inherit; }
+  .mono{ font-family: "Space Mono", ui-monospace, monospace; }
+  .display{ font-family: "Anton", system-ui, sans-serif; font-weight: 400; text-transform: uppercase; }
+  .wrap{ max-width: 1100px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+  .eyebrow{ font-family: "Space Mono", monospace; font-size: .72rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; margin: 0 0 8px; color: var(--crimson); }
+
+  .topnav{ position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 2px solid var(--line); background: color-mix(in oklab, var(--paper) 90%, transparent); backdrop-filter: blur(10px); padding: 18px clamp(20px, 4vw, 48px); font-family: "Space Mono", monospace; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .18em; }
+  .back{ color: var(--crimson); text-decoration: none; }
+  .langs{ display: flex; gap: 4px; border: 2px solid var(--line); border-radius: 999px; padding: 3px; }
+  .langs button{ border: 0; background: none; color: inherit; font: inherit; font-size: .62rem; padding: 5px 9px; border-radius: 999px; cursor: pointer; opacity: .6; }
+  .langs button.active{ background: var(--crimson); color: var(--crimson-foreground); opacity: 1; }
+
+  .hero{ background: var(--ink); color: var(--ink-foreground); border-bottom: 2px solid var(--line); padding: clamp(40px, 7vw, 80px) 0; }
+  .hero-grid{ display: grid; gap: 36px; align-items: center; }
+  @media (min-width: 900px){ .hero-grid{ grid-template-columns: 5fr 6fr; } }
+  .hero h1{ margin: 0; font-size: clamp(3rem, 9vw, 6.5rem); line-height: .9; }
+  .hero .lead{ margin: 20px 0 0; font-size: 1.1rem; line-height: 1.6; color: color-mix(in oklab, var(--ink-foreground) 82%, transparent); }
+  .pills{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .pill{ font-family: "Space Mono", monospace; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1.5px solid color-mix(in oklab, var(--ink-foreground) 30%, transparent); }
+  .pill.gold{ background: var(--gold); color: var(--gold-foreground); border-color: var(--gold); font-weight: 700; }
+  .shot img{ width: 100%; height: auto; }
+  .shot{ border-radius: 18px; border: 2px solid color-mix(in oklab, var(--ink-foreground) 20%, transparent); overflow: hidden; }
+
+  section{ padding: clamp(48px, 7vw, 80px) 0; border-bottom: 2px solid var(--line); }
+  h2.display{ margin: 0 0 28px; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; }
+  .notice{ display: flex; gap: 16px; align-items: flex-start; background: var(--gold); color: var(--gold-foreground); border: 2px solid var(--line); border-radius: 18px; padding: 22px 24px; font-size: 1.02rem; line-height: 1.55; }
+  .notice b{ display: block; font-family: "Space Mono", monospace; font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 6px; }
+  .features{ display: grid; gap: 16px; }
+  @media (min-width: 700px){ .features{ grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px){ .features{ grid-template-columns: 1fr 1fr 1fr; } }
+  .feature{ border: 2px solid var(--line); border-radius: 18px; padding: 22px; }
+  .feature .num{ font-family: "Space Mono", monospace; font-size: .7rem; color: var(--crimson); font-weight: 700; letter-spacing: .2em; }
+  .feature h3{ margin: 8px 0 8px; font-size: 1.15rem; }
+  .feature p{ margin: 0; line-height: 1.55; color: color-mix(in oklab, var(--paper-foreground) 78%, transparent); }
+  .stack{ display: grid; gap: 16px; }
+  @media (min-width: 800px){ .stack{ grid-template-columns: 1fr 1fr; } }
+  .layer{ border-radius: 18px; padding: 24px; border: 2px solid var(--line); }
+  .layer.ink{ background: var(--ink); color: var(--ink-foreground); }
+  .layer.cyan{ background: var(--cyan); color: var(--cyan-foreground); }
+  .layer.plum{ background: var(--plum); color: var(--plum-foreground); }
+  .layer.gold{ background: var(--gold); color: var(--gold-foreground); }
+  .layer h3{ margin: 0 0 6px; font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 1.6rem; letter-spacing: .02em; }
+  .layer .tech{ font-family: "Space Mono", monospace; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .8; margin-bottom: 12px; }
+  .layer ul{ margin: 0; padding-left: 18px; line-height: 1.6; }
+  .roles{ display: flex; flex-wrap: wrap; gap: 10px; }
+  .role{ border: 2px solid var(--line); border-radius: 999px; padding: 10px 18px; font-weight: 600; }
+  .role span{ font-family: "Space Mono", monospace; font-size: .7rem; color: var(--crimson); margin-right: 8px; }
+  footer{ padding: 36px 0 48px; font-family: "Space Mono", monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; }
+  footer a{ color: var(--crimson); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="back" href="/#projects" data-i18n="back">← Loyihalarga qaytish</a>
+  <div class="langs" role="group" aria-label="Til">
+    <button type="button" data-lang="uz">UZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" data-i18n="eyebrow">Loyiha · 2026</p>
+      <h1 class="display">MAGI</h1>
+      <p class="lead" data-i18n="lead">Universitet va oʻquv markazlari uchun imtihon va oʻquv jarayonini boshqarish platformasi: talabalar uchun sayt hamda oʻqituvchi va direktor uchun admin panel.</p>
+      <div class="pills">
+        <span class="pill gold" data-i18n="pillClient">Sotilgan loyiha</span>
+        <span class="pill">Fullstack</span><span class="pill">Node.js</span><span class="pill">Express</span><span class="pill">PostgreSQL</span><span class="pill">Next.js</span><span class="pill">TypeScript</span><span class="pill">OpenAI</span>
+      </div>
+    </div>
+    <div class="shot"><img src="/projects/project-magi.jpg" alt="MAGI" width="1024" height="640"></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="notice">
+      <div>
+        <b data-i18n="noticeTitle">Nega havola yoʻq?</b>
+        <span data-i18n="noticeText">Bu loyiha buyurtmachi uchun ishlab chiqilgan va unga sotilgan. Shu sababli sayt havolasi, manba kodi va ichidagi maʼlumotlar berilmaydi — bu yerda faqat loyiha nima qilishi koʻrsatilgan.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="featEyebrow">Imkoniyatlar</p>
+    <h2 class="display" data-i18n="featH2">Nimalar qilindi</h2>
+    <div class="features">
+      <div class="feature"><p class="num">01</p><h3 data-i18n="f0t">Imtihon va uy vazifalari</h3><p data-i18n="f0d">Test, ochiq savol va fayl yuklash turidagi savollar, boshlanish va tugash vaqti, bitta imtihonni bir nechta guruhga birdan berish.</p></div>
+      <div class="feature"><p class="num">02</p><h3 data-i18n="f1t">Savollar toʻplami</h3><p data-i18n="f1d">Savollarni bitta nom ostida saqlab qoʻyish va keyingi imtihonlarda bir bosishda qayta ishlatish.</p></div>
+      <div class="feature"><p class="num">03</p><h3 data-i18n="f2t">Avtomatik baholash</h3><p data-i18n="f2d">Test savollari darhol tekshiriladi, ochiq savollarni oʻqituvchi baholaydi, natijalar sinf ichida koʻrinadi.</p></div>
+      <div class="feature"><p class="num">04</p><h3 data-i18n="f3t">Guruhlar va dars jadvali</h3><p data-i18n="f3d">Guruhlar, talabalar roʻyxati, haftalik jadval: qaysi kun, soat nechada, qaysi xonada va qanday dars.</p></div>
+      <div class="feature"><p class="num">05</p><h3 data-i18n="f4t">Talabalar sayti</h3><p data-i18n="f4d">Talaba oʻz sinflari, imtihonlari, baholari va reytingini koʻradi, yangi imtihon chiqsa darhol xabar oladi.</p></div>
+      <div class="feature"><p class="num">06</p><h3 data-i18n="f5t">Admin panel va rollar</h3><p data-i18n="f5d">Direktor hammasini koʻradi, oʻqituvchi faqat oʻz guruhlarini; xodimlar, talabalar va ularning login maʼlumotlarini boshqarish.</p></div>
+      <div class="feature"><p class="num">07</p><h3 data-i18n="f6t">Magi AI yordamchisi</h3><p data-i18n="f6d">Imtihon tuzishda kerakli maʼlumotlarni birma-bir soʻraydi, tayyor variantlar taklif qiladi va internetdagi maʼlumotlar asosida test savollari tuzadi.</p></div>
+      <div class="feature"><p class="num">08</p><h3 data-i18n="f7t">Bildirishnomalar</h3><p data-i18n="f7d">Yangi imtihon, oʻzgarishlar va natijalar haqida real vaqtda xabarlar.</p></div>
+      <div class="feature"><p class="num">09</p><h3 data-i18n="f8t">Ikki tillilik</h3><p data-i18n="f8d">Butun interfeys oʻzbek va ingliz tillarida.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="howEyebrow">Texnik tomoni</p>
+    <h2 class="display" data-i18n="howH2">Qanday yozilgan</h2>
+    <div class="stack">
+      <div class="layer ink">
+        <h3 data-i18n="l0t">Backend</h3>
+        <p class="tech">Node.js · Express · TypeScript · PostgreSQL</p>
+        <ul>
+          <li data-i18n="l0_0">Har bir boʻlim (imtihonlar, savollar, guruhlar, davomat, bildirishnomalar, AI…) alohida feature-modul</li>
+          <li data-i18n="l0_1">PostgreSQL maʼlumotlar bazasi, migratsiyalar va qator darajasidagi xavfsizlik (RLS)</li>
+          <li data-i18n="l0_2">Rollar boʻyicha ruxsatlar: kim nimani koʻra oladi va oʻzgartira oladi</li>
+          <li data-i18n="l0_3">OpenAPI hujjatlari va Vitest bilan 600 dan ortiq avtomatik test</li>
+        </ul>
+      </div>
+      <div class="layer cyan">
+        <h3 data-i18n="l1t">Frontend</h3>
+        <p class="tech">Next.js · React · TypeScript · Tailwind CSS</p>
+        <ul>
+          <li data-i18n="l1_0">Ikkita alohida ilova: talabalar sayti va admin panel</li>
+          <li data-i18n="l1_1">Oʻzbek va ingliz tillari uchun i18n</li>
+          <li data-i18n="l1_2">Real vaqtdagi bildirishnomalar va qulay formalar</li>
+          <li data-i18n="l1_3">Moslashuvchan (responsive) dizayn</li>
+        </ul>
+      </div>
+      <div class="layer plum">
+        <h3 data-i18n="l2t">AI</h3>
+        <p class="tech">OpenAI API · Web search</p>
+        <ul>
+          <li data-i18n="l2_0">Suhbat orqali imtihon tuzadigan yordamchi</li>
+          <li data-i18n="l2_1">Har bir savolga tayyor javob variantlari</li>
+          <li data-i18n="l2_2">Testlarni internetdagi aniq maʼlumotlar asosida tuzish</li>
+          <li data-i18n="l2_3">Foydalanuvchi tasdiqlamaguncha hech narsa saqlanmaydi</li>
+        </ul>
+      </div>
+      <div class="layer gold">
+        <h3 data-i18n="l3t">Infratuzilma</h3>
+        <p class="tech">Railway · Vercel · Supabase</p>
+        <ul>
+          <li data-i18n="l3_0">Backend Railway'da, saytlar Vercel'da</li>
+          <li data-i18n="l3_1">Fayllar Supabase Storage'da</li>
+          <li data-i18n="l3_2">GitHub'ga push qilinganda avtomatik deploy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <a href="/#projects" data-i18n="back">← Loyihalarga qaytish</a> · <a href="/#contact" data-i18n="contact">Bogʻlanish</a>
+</footer>
+
+<script>
+(function(){
+  var STRINGS = {
+  "ru": {
+    "back": "← Назад к проектам",
+    "featEyebrow": "Возможности",
+    "featH2": "Что сделано",
+    "howEyebrow": "Техническая часть",
+    "howH2": "Как написано",
+    "contact": "Связаться",
+    "pillClient": "Проданный проект",
+    "eyebrow": "Проект · 2026",
+    "lead": "Платформа для управления экзаменами и учебным процессом в университетах и учебных центрах: сайт для студентов и админ-панель для преподавателей и директора.",
+    "noticeTitle": "Почему нет ссылки?",
+    "noticeText": "Этот проект разработан для заказчика и продан ему. Поэтому ссылка на сайт, исходный код и данные внутри не публикуются — здесь показано только то, что делает проект.",
+    "f0t": "Экзамены и домашние задания",
+    "f0d": "Тесты, открытые вопросы и загрузка файлов, время начала и окончания, один экзамен сразу для нескольких групп.",
+    "f1t": "Наборы вопросов",
+    "f1d": "Вопросы сохраняются под одним названием и в один клик используются в следующих экзаменах.",
+    "f2t": "Автоматическая оценка",
+    "f2d": "Тесты проверяются сразу, открытые вопросы оценивает преподаватель, результаты видны внутри класса.",
+    "f3t": "Группы и расписание",
+    "f3d": "Группы, списки студентов, недельное расписание: в какой день, во сколько, в какой аудитории и какой урок.",
+    "f4t": "Сайт для студентов",
+    "f4d": "Студент видит свои классы, экзамены, оценки и рейтинг и сразу получает уведомление о новом экзамене.",
+    "f5t": "Админ-панель и роли",
+    "f5d": "Директор видит всё, преподаватель — только свои группы; управление сотрудниками, студентами и их данными для входа.",
+    "f6t": "ИИ-помощник Magi AI",
+    "f6d": "При создании экзамена по очереди спрашивает нужные данные, предлагает готовые варианты и составляет тесты по данным из интернета.",
+    "f7t": "Уведомления",
+    "f7d": "Сообщения о новых экзаменах, изменениях и результатах в реальном времени.",
+    "f8t": "Два языка",
+    "f8d": "Весь интерфейс на узбекском и английском.",
+    "l0t": "Backend",
+    "l0_0": "Каждый раздел (экзамены, вопросы, группы, посещаемость, уведомления, ИИ…) — отдельный feature-модуль",
+    "l0_1": "База данных PostgreSQL, миграции и защита на уровне строк (RLS)",
+    "l0_2": "Права по ролям: кто что может видеть и менять",
+    "l0_3": "Документация OpenAPI и более 600 автотестов на Vitest",
+    "l1t": "Frontend",
+    "l1_0": "Два отдельных приложения: сайт для студентов и админ-панель",
+    "l1_1": "i18n для узбекского и английского",
+    "l1_2": "Уведомления в реальном времени и удобные формы",
+    "l1_3": "Адаптивный дизайн",
+    "l2t": "AI",
+    "l2_0": "Помощник, который создаёт экзамен в диалоге",
+    "l2_1": "Готовые варианты ответа на каждый вопрос",
+    "l2_2": "Тесты на основе точных данных из интернета",
+    "l2_3": "Ничего не сохраняется без подтверждения пользователя",
+    "l3t": "Инфраструктура",
+    "l3_0": "Backend на Railway, сайты на Vercel",
+    "l3_1": "Файлы в Supabase Storage",
+    "l3_2": "Автоматический деплой при push в GitHub"
+  },
+  "en": {
+    "back": "← Back to projects",
+    "featEyebrow": "Features",
+    "featH2": "What was built",
+    "howEyebrow": "Under the hood",
+    "howH2": "How it's built",
+    "contact": "Contact",
+    "pillClient": "Sold project",
+    "eyebrow": "Project · 2026",
+    "lead": "An exam and learning management platform for universities and learning centers: a website for students and an admin panel for teachers and directors.",
+    "noticeTitle": "Why is there no link?",
+    "noticeText": "This project was built for a client and sold to them, so the site link, source code, and the data inside aren't shared. This page only shows what the project does.",
+    "f0t": "Exams and homework",
+    "f0d": "Multiple-choice, open-ended, and file-upload questions, start and end times, and one exam assigned to several groups at once.",
+    "f1t": "Question sets",
+    "f1d": "Questions saved under one name and reused in later exams with a single click.",
+    "f2t": "Automatic grading",
+    "f2d": "Multiple-choice answers are checked instantly, teachers grade open answers, and results show up inside the class.",
+    "f3t": "Groups and timetables",
+    "f3d": "Groups, student lists, and a weekly timetable: which day, what time, which room, and which lesson.",
+    "f4t": "Student website",
+    "f4d": "Students see their classes, exams, grades, and ranking, and get notified as soon as a new exam is posted.",
+    "f5t": "Admin panel and roles",
+    "f5d": "Directors see everything and teachers see only their own groups; staff, students, and their sign-in details are managed here.",
+    "f6t": "Magi AI assistant",
+    "f6d": "When building an exam it asks for each detail in turn, suggests ready-made options, and writes test questions from information found online.",
+    "f7t": "Notifications",
+    "f7d": "Real-time messages about new exams, changes, and results.",
+    "f8t": "Two languages",
+    "f8d": "The whole interface works in Uzbek and English.",
+    "l0t": "Backend",
+    "l0_0": "Each area (exams, questions, groups, attendance, notifications, AI…) is its own feature module",
+    "l0_1": "PostgreSQL database with migrations and row-level security (RLS)",
+    "l0_2": "Role-based permissions for who can see and change what",
+    "l0_3": "OpenAPI docs and more than 600 automated tests with Vitest",
+    "l1t": "Frontend",
+    "l1_0": "Two separate apps: the student website and the admin panel",
+    "l1_1": "i18n for Uzbek and English",
+    "l1_2": "Real-time notifications and easy-to-use forms",
+    "l1_3": "Responsive design",
+    "l2t": "AI",
+    "l2_0": "An assistant that builds an exam through conversation",
+    "l2_1": "Ready-made answer options for every question",
+    "l2_2": "Tests built from accurate information found online",
+    "l2_3": "Nothing is saved until the user confirms",
+    "l3t": "Infrastructure",
+    "l3_0": "Backend on Railway, websites on Vercel",
+    "l3_1": "Files in Supabase Storage",
+    "l3_2": "Automatic deploys on every push to GitHub"
+  }
+};
+  var KEY = 'hs-portfolio-lang';
+  var original = {};
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ original[el.getAttribute('data-i18n')] = el.textContent; });
+  function apply(lang){
+    var dict = STRINGS[lang] || original;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      el.textContent = dict[k] !== undefined ? dict[k] : original[k];
+    });
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('.langs button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+  }
+  var saved = 'uz';
+  try { saved = localStorage.getItem(KEY) || 'uz'; } catch (e) {}
+  apply(saved);
+  document.querySelectorAll('.langs button').forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); });
+  });
+})();
+</script>
+</body>
+</html>

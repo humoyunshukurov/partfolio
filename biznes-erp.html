@@ -83,6 +83,7 @@
   .pills{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
   .pill{ font-family: "Space Mono", monospace; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1.5px solid color-mix(in oklab, var(--ink-foreground) 30%, transparent); }
   .pill.gold{ background: var(--gold); color: var(--gold-foreground); border-color: var(--gold); font-weight: 700; }
+  .shot img{ width: 100%; height: auto; }
   .shot{ border-radius: 18px; border: 2px solid color-mix(in oklab, var(--ink-foreground) 20%, transparent); overflow: hidden; }
 
   section{ padding: clamp(48px, 7vw, 80px) 0; border-bottom: 2px solid var(--line); }
@@ -128,9 +129,8 @@
       <h1 class="display">Biznes ERP</h1>
       <p class="lead" data-i18n="lead">Doʻkon va kichik bizneslar uchun toʻliq ERP tizimi: kassadan tortib ombor, sotuv, moliya va onlayn doʻkongacha — hammasi bitta joyda.</p>
       <div class="pills">
-        <span class="pill gold" data-i18n="pillStartup">Startap</span>
-        <span class="pill">Fullstack</span>
-        <span class="pill">NestJS</span><span class="pill">Prisma</span><span class="pill">PostgreSQL</span><span class="pill">React</span><span class="pill">TypeScript</span>
+        <span class="pill gold" data-i18n="pillClient">Sotilgan loyiha</span>
+        <span class="pill">Fullstack</span><span class="pill">NestJS</span><span class="pill">Prisma</span><span class="pill">PostgreSQL</span><span class="pill">React</span><span class="pill">TypeScript</span>
       </div>
     </div>
     <div class="shot"><img src="/projects/project-biznes-erp.jpg" alt="Biznes ERP" width="1024" height="640"></div>
@@ -142,7 +142,7 @@
     <div class="notice">
       <div>
         <b data-i18n="noticeTitle">Nega havola yoʻq?</b>
-        <span data-i18n="noticeText">Bu loyiha startap sifatida ishlab chiqilmoqda va hali ommaga chiqarilmagan. Shu sababli sayt havolasi va manba kodi ochiq berilmaydi. Batafsil koʻrsatib berishim mumkin — bogʻlaning.</span>
+        <span data-i18n="noticeText">Bu loyiha buyurtmachi uchun ishlab chiqilgan va unga sotilgan. Shu sababli sayt havolasi, manba kodi va ichidagi maʼlumotlar berilmaydi — bu yerda faqat loyiha nima qilishi koʻrsatilgan.</span>
       </div>
     </div>
   </div>
@@ -153,15 +153,15 @@
     <p class="eyebrow" data-i18n="featEyebrow">Imkoniyatlar</p>
     <h2 class="display" data-i18n="featH2">Nimalar qilindi</h2>
     <div class="features">
-      <div class="feature"><p class="num">01</p><h3 data-i18n="f1t">Kassa (POS) va smenalar</h3><p data-i18n="f1d">Shtrix-kod orqali tez sotuv, chek, kassir smenasini ochish va yopish, kassadagi kirim, chiqim va oʻtkazmalar.</p></div>
-      <div class="feature"><p class="num">02</p><h3 data-i18n="f2t">Ombor va inventar</h3><p data-i18n="f2d">Mahsulotlar, kategoriya, brend va oʻlchov birliklari, bir nechta shtrix-kod, har bir kirim-chiqim tarixi va inventarizatsiya (reviziya).</p></div>
-      <div class="feature"><p class="num">03</p><h3 data-i18n="f3t">Etiketka va shtrix-kod</h3><p data-i18n="f3d">Narx etiketkalarini shtrix-kod bilan chop etish, Excel orqali mahsulotlarni import va eksport qilish.</p></div>
-      <div class="feature"><p class="num">04</p><h3 data-i18n="f4t">Sotuv va mijozlar (CRM)</h3><p data-i18n="f4d">Buyurtmalar holati, mijozlar bazasi, qaytarilgan tovarlar, hisob-fakturalar va qisman toʻlovlar.</p></div>
-      <div class="feature"><p class="num">05</p><h3 data-i18n="f5t">Yetkazib beruvchilar</h3><p data-i18n="f5d">Yetkazib beruvchilardan tovar qabul qilish, ularga qarz va toʻlovlarni yuritish, kam qolgan tovarlarni qayta buyurtma qilish.</p></div>
-      <div class="feature"><p class="num">06</p><h3 data-i18n="f6t">Moliya va statistika</h3><p data-i18n="f6d">Xarajatlar, foyda va tushumlar, kunlik va oylik hisobotlar, grafiklar bilan biznes holatini kuzatish.</p></div>
-      <div class="feature"><p class="num">07</p><h3 data-i18n="f7t">Onlayn doʻkon</h3><p data-i18n="f7d">Mijozlar onlayn buyurtma beradi, doʻkon uni qabul qiladi yoki rad etadi — qabul qilingan buyurtma avtomatik sotuvga aylanadi.</p></div>
-      <div class="feature"><p class="num">08</p><h3 data-i18n="f8t">Obuna va Super Admin</h3><p data-i18n="f8d">Tizimdan foydalanadigan bizneslar uchun alohida panel: sinov muddati, obunani uzaytirish yoki toʻxtatish, oylik daromad (MRR) statistikasi.</p></div>
-      <div class="feature"><p class="num">09</p><h3 data-i18n="f9t">Koʻp tillilik</h3><p data-i18n="f9d">Interfeys va tarix yozuvlari foydalanuvchi tanlagan tilda koʻrsatiladi.</p></div>
+      <div class="feature"><p class="num">01</p><h3 data-i18n="f0t">Kassa (POS) va smenalar</h3><p data-i18n="f0d">Shtrix-kod orqali tez sotuv, chek, kassir smenasini ochish va yopish, kassadagi kirim, chiqim va oʻtkazmalar.</p></div>
+      <div class="feature"><p class="num">02</p><h3 data-i18n="f1t">Ombor va inventar</h3><p data-i18n="f1d">Mahsulotlar, kategoriya, brend va oʻlchov birliklari, bir nechta shtrix-kod, har bir kirim-chiqim tarixi va inventarizatsiya (reviziya).</p></div>
+      <div class="feature"><p class="num">03</p><h3 data-i18n="f2t">Etiketka va shtrix-kod</h3><p data-i18n="f2d">Narx etiketkalarini shtrix-kod bilan chop etish, Excel orqali mahsulotlarni import va eksport qilish.</p></div>
+      <div class="feature"><p class="num">04</p><h3 data-i18n="f3t">Sotuv va mijozlar (CRM)</h3><p data-i18n="f3d">Buyurtmalar holati, mijozlar bazasi, qaytarilgan tovarlar, hisob-fakturalar va qisman toʻlovlar.</p></div>
+      <div class="feature"><p class="num">05</p><h3 data-i18n="f4t">Yetkazib beruvchilar</h3><p data-i18n="f4d">Yetkazib beruvchilardan tovar qabul qilish, ularga qarz va toʻlovlarni yuritish, kam qolgan tovarlarni qayta buyurtma qilish.</p></div>
+      <div class="feature"><p class="num">06</p><h3 data-i18n="f5t">Moliya va statistika</h3><p data-i18n="f5d">Xarajatlar, foyda va tushumlar, kunlik va oylik hisobotlar, grafiklar bilan biznes holatini kuzatish.</p></div>
+      <div class="feature"><p class="num">07</p><h3 data-i18n="f6t">Onlayn doʻkon</h3><p data-i18n="f6d">Mijozlar onlayn buyurtma beradi, doʻkon uni qabul qiladi yoki rad etadi — qabul qilingan buyurtma avtomatik sotuvga aylanadi.</p></div>
+      <div class="feature"><p class="num">08</p><h3 data-i18n="f7t">Obuna va Super Admin</h3><p data-i18n="f7d">Tizimdan foydalanadigan bizneslar uchun alohida panel: sinov muddati, obunani uzaytirish yoki toʻxtatish, oylik daromad (MRR) statistikasi.</p></div>
+      <div class="feature"><p class="num">09</p><h3 data-i18n="f8t">Koʻp tillilik</h3><p data-i18n="f8d">Interfeys va tarix yozuvlari foydalanuvchi tanlagan tilda koʻrsatiladi.</p></div>
     </div>
   </div>
 </section>
@@ -172,40 +172,40 @@
     <h2 class="display" data-i18n="howH2">Qanday yozilgan</h2>
     <div class="stack">
       <div class="layer ink">
-        <h3>Backend</h3>
+        <h3 data-i18n="l0t">Backend</h3>
         <p class="tech">NestJS · Prisma · PostgreSQL · JWT</p>
         <ul>
-          <li data-i18n="b1">Har bir boʻlim (kassa, ombor, sotuv, moliya…) alohida NestJS moduli: controller, service va DTO</li>
-          <li data-i18n="b2">Prisma ORM va 25 ta jadvaldan iborat maʼlumotlar bazasi sxemasi, migratsiyalar</li>
-          <li data-i18n="b3">JWT orqali autentifikatsiya va rollar boʻyicha ruxsatlar</li>
-          <li data-i18n="b4">class-validator bilan kiruvchi maʼlumotlarni tekshirish</li>
+          <li data-i18n="l0_0">Har bir boʻlim (kassa, ombor, sotuv, moliya…) alohida NestJS moduli: controller, service va DTO</li>
+          <li data-i18n="l0_1">Prisma ORM va 25 ta jadvaldan iborat maʼlumotlar bazasi sxemasi, migratsiyalar</li>
+          <li data-i18n="l0_2">JWT orqali autentifikatsiya va rollar boʻyicha ruxsatlar</li>
+          <li data-i18n="l0_3">class-validator bilan kiruvchi maʼlumotlarni tekshirish</li>
         </ul>
       </div>
       <div class="layer cyan">
-        <h3>Frontend</h3>
+        <h3 data-i18n="l1t">Frontend</h3>
         <p class="tech">React · Vite · TypeScript · Tailwind CSS</p>
         <ul>
-          <li data-i18n="fe1">TanStack Query bilan server maʼlumotlari va keshlash</li>
-          <li data-i18n="fe2">Zustand orqali holat (state) boshqaruvi, React Router bilan sahifalar</li>
-          <li data-i18n="fe3">JsBarcode bilan shtrix-kod, Excel fayllarni oʻqish va yozish</li>
-          <li data-i18n="fe4">Sahifalarni kerak boʻlganda yuklash (lazy loading)</li>
+          <li data-i18n="l1_0">TanStack Query bilan server maʼlumotlari va keshlash</li>
+          <li data-i18n="l1_1">Zustand orqali holat (state) boshqaruvi, React Router bilan sahifalar</li>
+          <li data-i18n="l1_2">JsBarcode bilan shtrix-kod, Excel fayllarni oʻqish va yozish</li>
+          <li data-i18n="l1_3">Sahifalarni kerak boʻlganda yuklash (lazy loading)</li>
         </ul>
       </div>
       <div class="layer plum">
-        <h3 data-i18n="infraT">Infratuzilma</h3>
+        <h3 data-i18n="l2t">Infratuzilma</h3>
         <p class="tech">Docker · Docker Compose · Monorepo</p>
         <ul>
-          <li data-i18n="i1">Backend va frontend bitta monorepoda</li>
-          <li data-i18n="i2">PostgreSQL Docker Compose orqali ishga tushiriladi</li>
+          <li data-i18n="l2_0">Backend va frontend bitta monorepoda</li>
+          <li data-i18n="l2_1">PostgreSQL Docker Compose orqali ishga tushiriladi</li>
         </ul>
       </div>
       <div class="layer gold">
-        <h3 data-i18n="rolesT">Rollar</h3>
+        <h3 data-i18n="l3t">Rollar</h3>
         <p class="tech">Admin · Manager · Staff · Super Admin</p>
         <ul>
-          <li data-i18n="r1">Admin — biznesning hamma boʻlimlari va sozlamalari</li>
-          <li data-i18n="r2">Manager va Staff — oʻz vazifasiga kerakli boʻlimlar</li>
-          <li data-i18n="r3">Super Admin — platformadagi barcha biznes-mijozlar va obunalar</li>
+          <li data-i18n="l3_0">Admin — biznesning hamma boʻlimlari va sozlamalari</li>
+          <li data-i18n="l3_1">Manager va Staff — oʻz vazifasiga kerakli boʻlimlar</li>
+          <li data-i18n="l3_2">Super Admin — platformadagi barcha biznes-mijozlar va obunalar</li>
         </ul>
       </div>
     </div>
@@ -219,63 +219,103 @@
 <script>
 (function(){
   var STRINGS = {
-    ru: {
-      back: "← Назад к проектам", eyebrow: "Проект · 2026",
-      lead: "Полноценная ERP-система для магазинов и малого бизнеса: от кассы до склада, продаж, финансов и онлайн-магазина — всё в одном месте.",
-      pillStartup: "Стартап", noticeTitle: "Почему нет ссылки?",
-      noticeText: "Проект разрабатывается как стартап и ещё не запущен публично. Поэтому ссылка на сайт и исходный код не публикуются. Могу показать подробнее — свяжитесь со мной.",
-      featEyebrow: "Возможности", featH2: "Что сделано",
-      f1t: "Касса (POS) и смены", f1d: "Быстрая продажа по штрихкоду, чек, открытие и закрытие смены кассира, приход, расход и переводы по кассе.",
-      f2t: "Склад и инвентарь", f2d: "Товары, категории, бренды и единицы измерения, несколько штрихкодов, история каждого движения и инвентаризация (ревизия).",
-      f3t: "Этикетки и штрихкоды", f3d: "Печать ценников со штрихкодом, импорт и экспорт товаров через Excel.",
-      f4t: "Продажи и клиенты (CRM)", f4d: "Статусы заказов, база клиентов, возвраты, счета-фактуры и частичные оплаты.",
-      f5t: "Поставщики", f5d: "Приёмка товара от поставщиков, учёт долгов и оплат, повторный заказ заканчивающихся товаров.",
-      f6t: "Финансы и статистика", f6d: "Расходы, прибыль и выручка, дневные и месячные отчёты, графики состояния бизнеса.",
-      f7t: "Онлайн-магазин", f7d: "Клиенты оформляют заказ онлайн, магазин принимает или отклоняет его — принятый заказ автоматически становится продажей.",
-      f8t: "Подписки и Супер-админ", f8d: "Отдельная панель для бизнесов-клиентов: пробный период, продление или приостановка подписки, статистика MRR.",
-      f9t: "Мультиязычность", f9d: "Интерфейс и записи истории показываются на выбранном пользователем языке.",
-      howEyebrow: "Техническая часть", howH2: "Как написано",
-      b1: "Каждый раздел (касса, склад, продажи, финансы…) — отдельный модуль NestJS: controller, service и DTO",
-      b2: "Prisma ORM и схема базы данных из 25 таблиц, миграции",
-      b3: "Аутентификация через JWT и права доступа по ролям",
-      b4: "Валидация входящих данных через class-validator",
-      fe1: "Серверные данные и кеширование через TanStack Query",
-      fe2: "Управление состоянием через Zustand, страницы на React Router",
-      fe3: "Штрихкоды через JsBarcode, чтение и запись Excel-файлов",
-      fe4: "Ленивая загрузка страниц (lazy loading)",
-      infraT: "Инфраструктура", i1: "Backend и frontend в одном монорепозитории", i2: "PostgreSQL запускается через Docker Compose",
-      rolesT: "Роли", r1: "Админ — все разделы и настройки бизнеса", r2: "Менеджер и Сотрудник — разделы, нужные для их работы", r3: "Супер-админ — все бизнесы-клиенты и подписки платформы",
-      contact: "Связаться"
-    },
-    en: {
-      back: "← Back to projects", eyebrow: "Project · 2026",
-      lead: "A complete ERP system for shops and small businesses: from the cash register to inventory, sales, finance, and an online store, all in one place.",
-      pillStartup: "Startup", noticeTitle: "Why is there no link?",
-      noticeText: "This project is being built as a startup and hasn't launched publicly yet, so the site link and source code aren't shared. I'm happy to walk you through it — get in touch.",
-      featEyebrow: "Features", featH2: "What was built",
-      f1t: "Point of sale and shifts", f1d: "Fast barcode checkout, receipts, opening and closing cashier shifts, and cash in, cash out, and transfers.",
-      f2t: "Inventory", f2d: "Products, categories, brands, and units, multiple barcodes per product, a full history of every stock movement, and stock audits.",
-      f3t: "Labels and barcodes", f3d: "Printing price labels with barcodes, plus importing and exporting products through Excel.",
-      f4t: "Sales and customers (CRM)", f4d: "Order statuses, a customer base, returns, invoices, and partial payments.",
-      f5t: "Suppliers", f5d: "Receiving stock from suppliers, tracking what's owed and paid, and reordering items that are running low.",
-      f6t: "Finance and analytics", f6d: "Expenses, profit, and revenue, daily and monthly reports, and charts showing how the business is doing.",
-      f7t: "Online store", f7d: "Customers order online and the shop accepts or rejects the order; an accepted order automatically becomes a sale.",
-      f8t: "Subscriptions and Super Admin", f8d: "A separate panel for the businesses using the system: trial periods, extending or pausing subscriptions, and MRR stats.",
-      f9t: "Multiple languages", f9d: "The interface and history entries are shown in the language the user picks.",
-      howEyebrow: "Under the hood", howH2: "How it's built",
-      b1: "Each area (POS, inventory, sales, finance…) is its own NestJS module with a controller, service, and DTOs",
-      b2: "Prisma ORM with a 25-table database schema and migrations",
-      b3: "JWT authentication and role-based permissions",
-      b4: "Incoming data validated with class-validator",
-      fe1: "Server data and caching with TanStack Query",
-      fe2: "State management with Zustand, routing with React Router",
-      fe3: "Barcodes with JsBarcode, reading and writing Excel files",
-      fe4: "Pages loaded on demand (lazy loading)",
-      infraT: "Infrastructure", i1: "Backend and frontend in a single monorepo", i2: "PostgreSQL runs through Docker Compose",
-      rolesT: "Roles", r1: "Admin: every area and setting of the business", r2: "Manager and Staff: the areas their job needs", r3: "Super Admin: every client business and subscription on the platform",
-      contact: "Contact"
-    }
-  };
+  "ru": {
+    "back": "← Назад к проектам",
+    "featEyebrow": "Возможности",
+    "featH2": "Что сделано",
+    "howEyebrow": "Техническая часть",
+    "howH2": "Как написано",
+    "contact": "Связаться",
+    "pillClient": "Проданный проект",
+    "eyebrow": "Проект · 2026",
+    "lead": "Полноценная ERP-система для магазинов и малого бизнеса: от кассы до склада, продаж, финансов и онлайн-магазина — всё в одном месте.",
+    "noticeTitle": "Почему нет ссылки?",
+    "noticeText": "Этот проект разработан для заказчика и продан ему. Поэтому ссылка на сайт, исходный код и данные внутри не публикуются — здесь показано только то, что делает проект.",
+    "f0t": "Касса (POS) и смены",
+    "f0d": "Быстрая продажа по штрихкоду, чек, открытие и закрытие смены кассира, приход, расход и переводы по кассе.",
+    "f1t": "Склад и инвентарь",
+    "f1d": "Товары, категории, бренды и единицы измерения, несколько штрихкодов, история каждого движения и инвентаризация (ревизия).",
+    "f2t": "Этикетки и штрихкоды",
+    "f2d": "Печать ценников со штрихкодом, импорт и экспорт товаров через Excel.",
+    "f3t": "Продажи и клиенты (CRM)",
+    "f3d": "Статусы заказов, база клиентов, возвраты, счета-фактуры и частичные оплаты.",
+    "f4t": "Поставщики",
+    "f4d": "Приёмка товара от поставщиков, учёт долгов и оплат, повторный заказ заканчивающихся товаров.",
+    "f5t": "Финансы и статистика",
+    "f5d": "Расходы, прибыль и выручка, дневные и месячные отчёты, графики состояния бизнеса.",
+    "f6t": "Онлайн-магазин",
+    "f6d": "Клиенты оформляют заказ онлайн, магазин принимает или отклоняет его — принятый заказ автоматически становится продажей.",
+    "f7t": "Подписки и Супер-админ",
+    "f7d": "Отдельная панель для бизнесов-клиентов: пробный период, продление или приостановка подписки, статистика MRR.",
+    "f8t": "Мультиязычность",
+    "f8d": "Интерфейс и записи истории показываются на выбранном пользователем языке.",
+    "l0t": "Backend",
+    "l0_0": "Каждый раздел (касса, склад, продажи, финансы…) — отдельный модуль NestJS: controller, service и DTO",
+    "l0_1": "Prisma ORM и схема базы данных из 25 таблиц, миграции",
+    "l0_2": "Аутентификация через JWT и права доступа по ролям",
+    "l0_3": "Валидация входящих данных через class-validator",
+    "l1t": "Frontend",
+    "l1_0": "Серверные данные и кеширование через TanStack Query",
+    "l1_1": "Управление состоянием через Zustand, страницы на React Router",
+    "l1_2": "Штрихкоды через JsBarcode, чтение и запись Excel-файлов",
+    "l1_3": "Ленивая загрузка страниц (lazy loading)",
+    "l2t": "Инфраструктура",
+    "l2_0": "Backend и frontend в одном монорепозитории",
+    "l2_1": "PostgreSQL запускается через Docker Compose",
+    "l3t": "Роли",
+    "l3_0": "Админ — все разделы и настройки бизнеса",
+    "l3_1": "Менеджер и Сотрудник — разделы, нужные для их работы",
+    "l3_2": "Супер-админ — все бизнесы-клиенты и подписки платформы"
+  },
+  "en": {
+    "back": "← Back to projects",
+    "featEyebrow": "Features",
+    "featH2": "What was built",
+    "howEyebrow": "Under the hood",
+    "howH2": "How it's built",
+    "contact": "Contact",
+    "pillClient": "Sold project",
+    "eyebrow": "Project · 2026",
+    "lead": "A complete ERP system for shops and small businesses: from the cash register to inventory, sales, finance, and an online store, all in one place.",
+    "noticeTitle": "Why is there no link?",
+    "noticeText": "This project was built for a client and sold to them, so the site link, source code, and the data inside aren't shared. This page only shows what the project does.",
+    "f0t": "Point of sale and shifts",
+    "f0d": "Fast barcode checkout, receipts, opening and closing cashier shifts, and cash in, cash out, and transfers.",
+    "f1t": "Inventory",
+    "f1d": "Products, categories, brands, and units, multiple barcodes per product, a full history of every stock movement, and stock audits.",
+    "f2t": "Labels and barcodes",
+    "f2d": "Printing price labels with barcodes, plus importing and exporting products through Excel.",
+    "f3t": "Sales and customers (CRM)",
+    "f3d": "Order statuses, a customer base, returns, invoices, and partial payments.",
+    "f4t": "Suppliers",
+    "f4d": "Receiving stock from suppliers, tracking what's owed and paid, and reordering items that are running low.",
+    "f5t": "Finance and analytics",
+    "f5d": "Expenses, profit, and revenue, daily and monthly reports, and charts showing how the business is doing.",
+    "f6t": "Online store",
+    "f6d": "Customers order online and the shop accepts or rejects the order; an accepted order automatically becomes a sale.",
+    "f7t": "Subscriptions and Super Admin",
+    "f7d": "A separate panel for the businesses using the system: trial periods, extending or pausing subscriptions, and MRR stats.",
+    "f8t": "Multiple languages",
+    "f8d": "The interface and history entries are shown in the language the user picks.",
+    "l0t": "Backend",
+    "l0_0": "Each area (POS, inventory, sales, finance…) is its own NestJS module with a controller, service, and DTOs",
+    "l0_1": "Prisma ORM with a 25-table database schema and migrations",
+    "l0_2": "JWT authentication and role-based permissions",
+    "l0_3": "Incoming data validated with class-validator",
+    "l1t": "Frontend",
+    "l1_0": "Server data and caching with TanStack Query",
+    "l1_1": "State management with Zustand, routing with React Router",
+    "l1_2": "Barcodes with JsBarcode, reading and writing Excel files",
+    "l1_3": "Pages loaded on demand (lazy loading)",
+    "l2t": "Infrastructure",
+    "l2_0": "Backend and frontend in a single monorepo",
+    "l2_1": "PostgreSQL runs through Docker Compose",
+    "l3t": "Roles",
+    "l3_0": "Admin: every area and setting of the business",
+    "l3_1": "Manager and Staff: the areas their job needs",
+    "l3_2": "Super Admin: every client business and subscription on the platform"
+  }
+};
   var KEY = 'hs-portfolio-lang';
   var original = {};
   document.querySelectorAll('[data-i18n]').forEach(function(el){ original[el.getAttribute('data-i18n')] = el.textContent; });
