@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Biznes ERP — doʻkon va kichik bizneslar uchun ERP tizimi. Shukurov Humoyun loyihasi.">
+<title>Biznes ERP · Humoyun Shukurov</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23d6432f'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap">
+<script>
+  try { var t = localStorage.getItem('hs-site-theme'); if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+<style>
+  :root{
+    --paper: oklch(0.951 0.017 85.2);
+    --paper-foreground: oklch(0.196 0.011 62);
+    --ink: oklch(0.196 0.011 62);
+    --ink-foreground: oklch(0.951 0.017 85.2);
+    --line: oklch(0.196 0.011 62);
+    --crimson: oklch(0.583 0.216 21.9);
+    --crimson-foreground: oklch(0.966 0.014 85.2);
+    --gold: oklch(0.796 0.144 76.4);
+    --gold-foreground: oklch(0.196 0.011 62);
+    --cyan: oklch(0.694 0.107 199.1);
+    --cyan-foreground: oklch(0.196 0.011 62);
+    --plum: oklch(0.376 0.126 315.6);
+    --plum-foreground: oklch(0.966 0.014 85.2);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: oklch(0.183 0.008 62);
+      --paper-foreground: oklch(0.941 0.014 85.2);
+      --ink: oklch(0.126 0.006 62);
+      --ink-foreground: oklch(0.941 0.014 85.2);
+      --line: oklch(0.372 0.01 62);
+      --crimson: oklch(0.63 0.203 21.9);
+      --crimson-foreground: oklch(0.98 0.01 85.2);
+      --gold: oklch(0.812 0.14 76.4);
+      --gold-foreground: oklch(0.14 0.008 62);
+      --cyan: oklch(0.73 0.104 199.1);
+      --cyan-foreground: oklch(0.14 0.008 62);
+      --plum: oklch(0.44 0.132 315.6);
+      --plum-foreground: oklch(0.98 0.01 85.2);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: oklch(0.183 0.008 62);
+    --paper-foreground: oklch(0.941 0.014 85.2);
+    --ink: oklch(0.126 0.006 62);
+    --ink-foreground: oklch(0.941 0.014 85.2);
+    --line: oklch(0.372 0.01 62);
+    --crimson: oklch(0.63 0.203 21.9);
+    --crimson-foreground: oklch(0.98 0.01 85.2);
+    --gold: oklch(0.812 0.14 76.4);
+    --gold-foreground: oklch(0.14 0.008 62);
+    --cyan: oklch(0.73 0.104 199.1);
+    --cyan-foreground: oklch(0.14 0.008 62);
+    --plum: oklch(0.44 0.132 315.6);
+    --plum-foreground: oklch(0.98 0.01 85.2);
+  }
+  *{ box-sizing: border-box; }
+  body{ margin: 0; background: var(--paper); color: var(--paper-foreground); font-family: "Space Grotesk", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  img{ max-width: 100%; display: block; }
+  a{ color: inherit; }
+  .mono{ font-family: "Space Mono", ui-monospace, monospace; }
+  .display{ font-family: "Anton", system-ui, sans-serif; font-weight: 400; text-transform: uppercase; }
+  .wrap{ max-width: 1100px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+  .eyebrow{ font-family: "Space Mono", monospace; font-size: .72rem; font-weight: 700; letter-spacing: .3em; text-transform: uppercase; margin: 0 0 8px; color: var(--crimson); }
+
+  .topnav{ position: sticky; top: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 2px solid var(--line); background: color-mix(in oklab, var(--paper) 90%, transparent); backdrop-filter: blur(10px); padding: 18px clamp(20px, 4vw, 48px); font-family: "Space Mono", monospace; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .18em; }
+  .back{ color: var(--crimson); text-decoration: none; }
+  .langs{ display: flex; gap: 4px; border: 2px solid var(--line); border-radius: 999px; padding: 3px; }
+  .langs button{ border: 0; background: none; color: inherit; font: inherit; font-size: .62rem; padding: 5px 9px; border-radius: 999px; cursor: pointer; opacity: .6; }
+  .langs button.active{ background: var(--crimson); color: var(--crimson-foreground); opacity: 1; }
+
+  .hero{ background: var(--ink); color: var(--ink-foreground); border-bottom: 2px solid var(--line); padding: clamp(40px, 7vw, 80px) 0; }
+  .hero-grid{ display: grid; gap: 36px; align-items: center; }
+  @media (min-width: 900px){ .hero-grid{ grid-template-columns: 5fr 6fr; } }
+  .hero h1{ margin: 0; font-size: clamp(3rem, 9vw, 6.5rem); line-height: .9; }
+  .hero .lead{ margin: 20px 0 0; font-size: 1.1rem; line-height: 1.6; color: color-mix(in oklab, var(--ink-foreground) 82%, transparent); }
+  .pills{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+  .pill{ font-family: "Space Mono", monospace; font-size: .66rem; letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; border: 1.5px solid color-mix(in oklab, var(--ink-foreground) 30%, transparent); }
+  .pill.gold{ background: var(--gold); color: var(--gold-foreground); border-color: var(--gold); font-weight: 700; }
+  .shot{ border-radius: 18px; border: 2px solid color-mix(in oklab, var(--ink-foreground) 20%, transparent); overflow: hidden; }
+
+  section{ padding: clamp(48px, 7vw, 80px) 0; border-bottom: 2px solid var(--line); }
+  h2.display{ margin: 0 0 28px; font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1; }
+  .notice{ display: flex; gap: 16px; align-items: flex-start; background: var(--gold); color: var(--gold-foreground); border: 2px solid var(--line); border-radius: 18px; padding: 22px 24px; font-size: 1.02rem; line-height: 1.55; }
+  .notice b{ display: block; font-family: "Space Mono", monospace; font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 6px; }
+  .features{ display: grid; gap: 16px; }
+  @media (min-width: 700px){ .features{ grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1000px){ .features{ grid-template-columns: 1fr 1fr 1fr; } }
+  .feature{ border: 2px solid var(--line); border-radius: 18px; padding: 22px; }
+  .feature .num{ font-family: "Space Mono", monospace; font-size: .7rem; color: var(--crimson); font-weight: 700; letter-spacing: .2em; }
+  .feature h3{ margin: 8px 0 8px; font-size: 1.15rem; }
+  .feature p{ margin: 0; line-height: 1.55; color: color-mix(in oklab, var(--paper-foreground) 78%, transparent); }
+  .stack{ display: grid; gap: 16px; }
+  @media (min-width: 800px){ .stack{ grid-template-columns: 1fr 1fr; } }
+  .layer{ border-radius: 18px; padding: 24px; border: 2px solid var(--line); }
+  .layer.ink{ background: var(--ink); color: var(--ink-foreground); }
+  .layer.cyan{ background: var(--cyan); color: var(--cyan-foreground); }
+  .layer.plum{ background: var(--plum); color: var(--plum-foreground); }
+  .layer.gold{ background: var(--gold); color: var(--gold-foreground); }
+  .layer h3{ margin: 0 0 6px; font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 1.6rem; letter-spacing: .02em; }
+  .layer .tech{ font-family: "Space Mono", monospace; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .8; margin-bottom: 12px; }
+  .layer ul{ margin: 0; padding-left: 18px; line-height: 1.6; }
+  .roles{ display: flex; flex-wrap: wrap; gap: 10px; }
+  .role{ border: 2px solid var(--line); border-radius: 999px; padding: 10px 18px; font-weight: 600; }
+  .role span{ font-family: "Space Mono", monospace; font-size: .7rem; color: var(--crimson); margin-right: 8px; }
+  footer{ padding: 36px 0 48px; font-family: "Space Mono", monospace; font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; }
+  footer a{ color: var(--crimson); text-decoration: none; }
+</style>
+</head>
+<body>
+<nav class="topnav">
+  <a class="back" href="/#projects" data-i18n="back">← Loyihalarga qaytish</a>
+  <div class="langs" role="group" aria-label="Til">
+    <button type="button" data-lang="uz">UZ</button><button type="button" data-lang="ru">RU</button><button type="button" data-lang="en">EN</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" data-i18n="eyebrow">Loyiha · 2026</p>
+      <h1 class="display">Biznes ERP</h1>
+      <p class="lead" data-i18n="lead">Doʻkon va kichik bizneslar uchun toʻliq ERP tizimi: kassadan tortib ombor, sotuv, moliya va onlayn doʻkongacha — hammasi bitta joyda.</p>
+      <div class="pills">
+        <span class="pill gold" data-i18n="pillStartup">Startap</span>
+        <span class="pill">Fullstack</span>
+        <span class="pill">NestJS</span><span class="pill">Prisma</span><span class="pill">PostgreSQL</span><span class="pill">React</span><span class="pill">TypeScript</span>
+      </div>
+    </div>
+    <div class="shot"><img src="/projects/project-biznes-erp.jpg" alt="Biznes ERP" width="1024" height="640"></div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="notice">
+      <div>
+        <b data-i18n="noticeTitle">Nega havola yoʻq?</b>
+        <span data-i18n="noticeText">Bu loyiha startap sifatida ishlab chiqilmoqda va hali ommaga chiqarilmagan. Shu sababli sayt havolasi va manba kodi ochiq berilmaydi. Batafsil koʻrsatib berishim mumkin — bogʻlaning.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="featEyebrow">Imkoniyatlar</p>
+    <h2 class="display" data-i18n="featH2">Nimalar qilindi</h2>
+    <div class="features">
+      <div class="feature"><p class="num">01</p><h3 data-i18n="f1t">Kassa (POS) va smenalar</h3><p data-i18n="f1d">Shtrix-kod orqali tez sotuv, chek, kassir smenasini ochish va yopish, kassadagi kirim, chiqim va oʻtkazmalar.</p></div>
+      <div class="feature"><p class="num">02</p><h3 data-i18n="f2t">Ombor va inventar</h3><p data-i18n="f2d">Mahsulotlar, kategoriya, brend va oʻlchov birliklari, bir nechta shtrix-kod, har bir kirim-chiqim tarixi va inventarizatsiya (reviziya).</p></div>
+      <div class="feature"><p class="num">03</p><h3 data-i18n="f3t">Etiketka va shtrix-kod</h3><p data-i18n="f3d">Narx etiketkalarini shtrix-kod bilan chop etish, Excel orqali mahsulotlarni import va eksport qilish.</p></div>
+      <div class="feature"><p class="num">04</p><h3 data-i18n="f4t">Sotuv va mijozlar (CRM)</h3><p data-i18n="f4d">Buyurtmalar holati, mijozlar bazasi, qaytarilgan tovarlar, hisob-fakturalar va qisman toʻlovlar.</p></div>
+      <div class="feature"><p class="num">05</p><h3 data-i18n="f5t">Yetkazib beruvchilar</h3><p data-i18n="f5d">Yetkazib beruvchilardan tovar qabul qilish, ularga qarz va toʻlovlarni yuritish, kam qolgan tovarlarni qayta buyurtma qilish.</p></div>
+      <div class="feature"><p class="num">06</p><h3 data-i18n="f6t">Moliya va statistika</h3><p data-i18n="f6d">Xarajatlar, foyda va tushumlar, kunlik va oylik hisobotlar, grafiklar bilan biznes holatini kuzatish.</p></div>
+      <div class="feature"><p class="num">07</p><h3 data-i18n="f7t">Onlayn doʻkon</h3><p data-i18n="f7d">Mijozlar onlayn buyurtma beradi, doʻkon uni qabul qiladi yoki rad etadi — qabul qilingan buyurtma avtomatik sotuvga aylanadi.</p></div>
+      <div class="feature"><p class="num">08</p><h3 data-i18n="f8t">Obuna va Super Admin</h3><p data-i18n="f8d">Tizimdan foydalanadigan bizneslar uchun alohida panel: sinov muddati, obunani uzaytirish yoki toʻxtatish, oylik daromad (MRR) statistikasi.</p></div>
+      <div class="feature"><p class="num">09</p><h3 data-i18n="f9t">Koʻp tillilik</h3><p data-i18n="f9d">Interfeys va tarix yozuvlari foydalanuvchi tanlagan tilda koʻrsatiladi.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="howEyebrow">Texnik tomoni</p>
+    <h2 class="display" data-i18n="howH2">Qanday yozilgan</h2>
+    <div class="stack">
+      <div class="layer ink">
+        <h3>Backend</h3>
+        <p class="tech">NestJS · Prisma · PostgreSQL · JWT</p>
+        <ul>
+          <li data-i18n="b1">Har bir boʻlim (kassa, ombor, sotuv, moliya…) alohida NestJS moduli: controller, service va DTO</li>
+          <li data-i18n="b2">Prisma ORM va 25 ta jadvaldan iborat maʼlumotlar bazasi sxemasi, migratsiyalar</li>
+          <li data-i18n="b3">JWT orqali autentifikatsiya va rollar boʻyicha ruxsatlar</li>
+          <li data-i18n="b4">class-validator bilan kiruvchi maʼlumotlarni tekshirish</li>
+        </ul>
+      </div>
+      <div class="layer cyan">
+        <h3>Frontend</h3>
+        <p class="tech">React · Vite · TypeScript · Tailwind CSS</p>
+        <ul>
+          <li data-i18n="fe1">TanStack Query bilan server maʼlumotlari va keshlash</li>
+          <li data-i18n="fe2">Zustand orqali holat (state) boshqaruvi, React Router bilan sahifalar</li>
+          <li data-i18n="fe3">JsBarcode bilan shtrix-kod, Excel fayllarni oʻqish va yozish</li>
+          <li data-i18n="fe4">Sahifalarni kerak boʻlganda yuklash (lazy loading)</li>
+        </ul>
+      </div>
+      <div class="layer plum">
+        <h3 data-i18n="infraT">Infratuzilma</h3>
+        <p class="tech">Docker · Docker Compose · Monorepo</p>
+        <ul>
+          <li data-i18n="i1">Backend va frontend bitta monorepoda</li>
+          <li data-i18n="i2">PostgreSQL Docker Compose orqali ishga tushiriladi</li>
+        </ul>
+      </div>
+      <div class="layer gold">
+        <h3 data-i18n="rolesT">Rollar</h3>
+        <p class="tech">Admin · Manager · Staff · Super Admin</p>
+        <ul>
+          <li data-i18n="r1">Admin — biznesning hamma boʻlimlari va sozlamalari</li>
+          <li data-i18n="r2">Manager va Staff — oʻz vazifasiga kerakli boʻlimlar</li>
+          <li data-i18n="r3">Super Admin — platformadagi barcha biznes-mijozlar va obunalar</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <a href="/#projects" data-i18n="back">← Loyihalarga qaytish</a> · <a href="/#contact" data-i18n="contact">Bogʻlanish</a>
+</footer>
+
+<script>
+(function(){
+  var STRINGS = {
+    ru: {
+      back: "← Назад к проектам", eyebrow: "Проект · 2026",
+      lead: "Полноценная ERP-система для магазинов и малого бизнеса: от кассы до склада, продаж, финансов и онлайн-магазина — всё в одном месте.",
+      pillStartup: "Стартап", noticeTitle: "Почему нет ссылки?",
+      noticeText: "Проект разрабатывается как стартап и ещё не запущен публично. Поэтому ссылка на сайт и исходный код не публикуются. Могу показать подробнее — свяжитесь со мной.",
+      featEyebrow: "Возможности", featH2: "Что сделано",
+      f1t: "Касса (POS) и смены", f1d: "Быстрая продажа по штрихкоду, чек, открытие и закрытие смены кассира, приход, расход и переводы по кассе.",
+      f2t: "Склад и инвентарь", f2d: "Товары, категории, бренды и единицы измерения, несколько штрихкодов, история каждого движения и инвентаризация (ревизия).",
+      f3t: "Этикетки и штрихкоды", f3d: "Печать ценников со штрихкодом, импорт и экспорт товаров через Excel.",
+      f4t: "Продажи и клиенты (CRM)", f4d: "Статусы заказов, база клиентов, возвраты, счета-фактуры и частичные оплаты.",
+      f5t: "Поставщики", f5d: "Приёмка товара от поставщиков, учёт долгов и оплат, повторный заказ заканчивающихся товаров.",
+      f6t: "Финансы и статистика", f6d: "Расходы, прибыль и выручка, дневные и месячные отчёты, графики состояния бизнеса.",
+      f7t: "Онлайн-магазин", f7d: "Клиенты оформляют заказ онлайн, магазин принимает или отклоняет его — принятый заказ автоматически становится продажей.",
+      f8t: "Подписки и Супер-админ", f8d: "Отдельная панель для бизнесов-клиентов: пробный период, продление или приостановка подписки, статистика MRR.",
+      f9t: "Мультиязычность", f9d: "Интерфейс и записи истории показываются на выбранном пользователем языке.",
+      howEyebrow: "Техническая часть", howH2: "Как написано",
+      b1: "Каждый раздел (касса, склад, продажи, финансы…) — отдельный модуль NestJS: controller, service и DTO",
+      b2: "Prisma ORM и схема базы данных из 25 таблиц, миграции",
+      b3: "Аутентификация через JWT и права доступа по ролям",
+      b4: "Валидация входящих данных через class-validator",
+      fe1: "Серверные данные и кеширование через TanStack Query",
+      fe2: "Управление состоянием через Zustand, страницы на React Router",
+      fe3: "Штрихкоды через JsBarcode, чтение и запись Excel-файлов",
+      fe4: "Ленивая загрузка страниц (lazy loading)",
+      infraT: "Инфраструктура", i1: "Backend и frontend в одном монорепозитории", i2: "PostgreSQL запускается через Docker Compose",
+      rolesT: "Роли", r1: "Админ — все разделы и настройки бизнеса", r2: "Менеджер и Сотрудник — разделы, нужные для их работы", r3: "Супер-админ — все бизнесы-клиенты и подписки платформы",
+      contact: "Связаться"
+    },
+    en: {
+      back: "← Back to projects", eyebrow: "Project · 2026",
+      lead: "A complete ERP system for shops and small businesses: from the cash register to inventory, sales, finance, and an online store, all in one place.",
+      pillStartup: "Startup", noticeTitle: "Why is there no link?",
+      noticeText: "This project is being built as a startup and hasn't launched publicly yet, so the site link and source code aren't shared. I'm happy to walk you through it — get in touch.",
+      featEyebrow: "Features", featH2: "What was built",
+      f1t: "Point of sale and shifts", f1d: "Fast barcode checkout, receipts, opening and closing cashier shifts, and cash in, cash out, and transfers.",
+      f2t: "Inventory", f2d: "Products, categories, brands, and units, multiple barcodes per product, a full history of every stock movement, and stock audits.",
+      f3t: "Labels and barcodes", f3d: "Printing price labels with barcodes, plus importing and exporting products through Excel.",
+      f4t: "Sales and customers (CRM)", f4d: "Order statuses, a customer base, returns, invoices, and partial payments.",
+      f5t: "Suppliers", f5d: "Receiving stock from suppliers, tracking what's owed and paid, and reordering items that are running low.",
+      f6t: "Finance and analytics", f6d: "Expenses, profit, and revenue, daily and monthly reports, and charts showing how the business is doing.",
+      f7t: "Online store", f7d: "Customers order online and the shop accepts or rejects the order; an accepted order automatically becomes a sale.",
+      f8t: "Subscriptions and Super Admin", f8d: "A separate panel for the businesses using the system: trial periods, extending or pausing subscriptions, and MRR stats.",
+      f9t: "Multiple languages", f9d: "The interface and history entries are shown in the language the user picks.",
+      howEyebrow: "Under the hood", howH2: "How it's built",
+      b1: "Each area (POS, inventory, sales, finance…) is its own NestJS module with a controller, service, and DTOs",
+      b2: "Prisma ORM with a 25-table database schema and migrations",
+      b3: "JWT authentication and role-based permissions",
+      b4: "Incoming data validated with class-validator",
+      fe1: "Server data and caching with TanStack Query",
+      fe2: "State management with Zustand, routing with React Router",
+      fe3: "Barcodes with JsBarcode, reading and writing Excel files",
+      fe4: "Pages loaded on demand (lazy loading)",
+      infraT: "Infrastructure", i1: "Backend and frontend in a single monorepo", i2: "PostgreSQL runs through Docker Compose",
+      rolesT: "Roles", r1: "Admin: every area and setting of the business", r2: "Manager and Staff: the areas their job needs", r3: "Super Admin: every client business and subscription on the platform",
+      contact: "Contact"
+    }
+  };
+  var KEY = 'hs-portfolio-lang';
+  var original = {};
+  document.querySelectorAll('[data-i18n]').forEach(function(el){ original[el.getAttribute('data-i18n')] = el.textContent; });
+  function apply(lang){
+    var dict = STRINGS[lang] || original;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      el.textContent = dict[k] !== undefined ? dict[k] : original[k];
+    });
+    document.documentElement.setAttribute('lang', lang);
+    document.querySelectorAll('.langs button').forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-lang') === lang); });
+    try { localStorage.setItem(KEY, lang); } catch (e) {}
+  }
+  var saved = 'uz';
+  try { saved = localStorage.getItem(KEY) || 'uz'; } catch (e) {}
+  apply(saved);
+  document.querySelectorAll('.langs button').forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); });
+  });
+})();
+</script>
+</body>
+</html>

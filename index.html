@@ -346,11 +346,6 @@
   .surface-gold{ background: var(--gold); color: var(--gold-foreground); }
   .surface-cyan{ background: var(--cyan); color: var(--cyan-foreground); }
   .surface-plum{ background: var(--plum); color: var(--plum-foreground); }
-  @media (min-width: 800px){
-    .project-card.wide{ grid-column: 1 / -1; display: grid; grid-template-columns: 7fr 5fr; }
-    .project-card.wide .project-thumb{ aspect-ratio: auto; min-height: 100%; }
-    .project-card.wide .project-body{ display: flex; flex-direction: column; justify-content: center; padding: 32px; }
-  }
 
   /* ---------- Skills ---------- */
   .section-skills{ background: var(--ink); color: var(--ink-foreground); border-top: 2px solid var(--line); }
@@ -551,11 +546,11 @@
     </div>
 
     <div class="project-grid" id="project-grid">
-      <a class="project-card wide surface-cyan reveal" data-cats="Fullstack AI" href="https://magi-frontend-tau.vercel.app" target="_blank" rel="noopener">
+      <a class="project-card surface-cyan reveal" data-cats="Fullstack AI" href="https://magi-frontend-tau.vercel.app" target="_blank" rel="noopener">
         <div class="project-thumb"><img src="/projects/project-magi.jpg" alt="MAGI loyihasining koʻrinishi" loading="lazy" width="1024" height="640"></div>
         <div class="project-body">
           <div class="project-meta"><span class="cat">Fullstack</span><span>2026</span></div>
-          <h3 class="project-title">MAGI<span class="sub">(University)</span></h3>
+          <h3 class="project-title">MAGI</h3>
           <p class="project-desc" data-i18n="project5Desc">Universitet va oʻquv markazlari uchun imtihon va oʻquv jarayonini boshqarish platformasi: guruhlar, dars jadvali, imtihon va uy vazifalari, avtomatik baholash, reyting va bildirishnomalar. Oʻqituvchi va direktor uchun admin panel hamda imtihon tuzish, maʼlumotlarni toʻldirishda yordam beradigan Magi AI yordamchisi bor.</p>
           <div class="project-foot">
             <p class="project-stack">Node.js · Express · PostgreSQL · Next.js · TypeScript · OpenAI</p>
@@ -623,6 +618,22 @@
             <p class="project-stack">Node.js · React · AI</p>
             <div class="project-links">
               <span class="mono" data-i18n="visitLabel">Saytni koʻrish ↗</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card surface-gold reveal" data-cats="Fullstack" href="/biznes-erp.html">
+        <div class="project-thumb"><img src="/projects/project-biznes-erp.jpg" alt="Biznes ERP loyihasining koʻrinishi" loading="lazy" width="1024" height="640"></div>
+        <div class="project-body">
+          <div class="project-meta"><span class="cat">Fullstack</span><span>2026</span></div>
+          <h3 class="project-title">Biznes ERP<span class="sub" data-i18n="startupSub">(Startap)</span></h3>
+          <p class="project-desc" data-i18n="project6Desc">Doʻkon va kichik bizneslar uchun ERP tizimi: kassa (POS), ombor va shtrix-kodlar, sotuv va mijozlar, yetkazib beruvchilar, moliya, onlayn doʻkon va obuna asosidagi mijozlarni boshqarish paneli.</p>
+          <div class="project-foot">
+            <p class="project-stack">NestJS · Prisma · PostgreSQL · React · TypeScript</p>
+            <div class="project-links">
+              <span class="mono" data-i18n="detailsLabel">Batafsil →</span>
+              <span class="mono" data-i18n="privateLabel">Startap · havola yopiq</span>
             </div>
           </div>
         </div>
@@ -803,6 +814,10 @@
       project3Desc: "Qurilish materiallari uchun onlayn doʻkon: mahsulot katalogi, savat, buyurtmalar, sharhlar va xaritada yetkazib berish.",
       project4Desc: "Oʻzbekistondagi barcha dorilarni nazorat qiladigan, kundalik sogʻliq yordamchisi — mutaxassislardan onlayn tavsiyalar va AI yordamchisi bilan.",
       project5Desc: "Universitet va oʻquv markazlari uchun imtihon va oʻquv jarayonini boshqarish platformasi: guruhlar, dars jadvali, imtihon va uy vazifalari, avtomatik baholash, reyting va bildirishnomalar. Oʻqituvchi va direktor uchun admin panel hamda imtihon tuzish, maʼlumotlarni toʻldirishda yordam beradigan Magi AI yordamchisi bor.",
+      project6Desc: "Doʻkon va kichik bizneslar uchun ERP tizimi: kassa (POS), ombor va shtrix-kodlar, sotuv va mijozlar, yetkazib beruvchilar, moliya, onlayn doʻkon va obuna asosidagi mijozlarni boshqarish paneli.",
+      detailsLabel: "Batafsil →",
+      privateLabel: "Startap · havola yopiq",
+      startupSub: "(Startap)",
       visitLabel: "Saytni koʻrish ↗",
       codeLabel: "Kod · GitHub",
       skillsEyebrow: "Koʻnikmalar",
@@ -886,6 +901,10 @@
       project3Desc: "Интернет-магазин строительных материалов: каталог товаров, корзина, заказы, отзывы и доставка с картой.",
       project4Desc: "Ежедневный помощник по здоровью, отслеживающий все лекарства в Узбекистане — с онлайн-рекомендациями специалистов и AI-помощником.",
       project5Desc: "Платформа для управления экзаменами и учебным процессом в университетах и учебных центрах: группы, расписание, экзамены и домашние задания, автоматическая оценка, рейтинг и уведомления. Есть админ-панель для преподавателей и директора, а также ИИ-помощник Magi AI, который помогает составлять экзамены и заполнять данные.",
+      project6Desc: "ERP-система для магазинов и малого бизнеса: касса (POS), склад и штрихкоды, продажи и клиенты, поставщики, финансы, онлайн-магазин и панель управления клиентами по подписке.",
+      detailsLabel: "Подробнее →",
+      privateLabel: "Стартап · ссылка закрыта",
+      startupSub: "(Стартап)",
       visitLabel: "Смотреть сайт ↗",
       codeLabel: "Код · GitHub",
       skillsEyebrow: "Навыки",
@@ -969,6 +988,10 @@
       project3Desc: "An online store for construction materials: product catalog, cart, orders, reviews, and map-based delivery.",
       project4Desc: "A daily health assistant that tracks every medicine available in Uzbekistan, with online recommendations from specialists and an AI assistant.",
       project5Desc: "An exam and learning management platform for universities and learning centers: groups, class timetables, exams and homework, automatic grading, rankings, and notifications. Includes an admin panel for teachers and directors, plus Magi AI, an assistant that helps build exams and fill in data.",
+      project6Desc: "An ERP system for shops and small businesses: point of sale, inventory with barcodes, sales and customers, suppliers, finance, an online store, and a panel for managing subscription clients.",
+      detailsLabel: "Details →",
+      privateLabel: "Startup · link private",
+      startupSub: "(Startup)",
       visitLabel: "Visit site ↗",
       codeLabel: "Code · GitHub",
       skillsEyebrow: "Skills",
