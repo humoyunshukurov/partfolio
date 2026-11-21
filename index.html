@@ -247,6 +247,11 @@
   .hero-glow.cyan{ top: -60px; right: -40px; width: 280px; height: 280px; background: color-mix(in oklab, var(--cyan) 20%, transparent); }
   .hero-glow.crimson{ bottom: -80px; left: -60px; width: 320px; height: 320px; background: color-mix(in oklab, var(--crimson) 20%, transparent); }
   .hero-inner{ position: relative; padding: clamp(48px, 8vw, 96px) clamp(20px, 4vw, 48px) 0; }
+  .hero-robot{ display: none; }
+  @media (min-width: 1200px){
+    .hero-robot{ display: block; position: absolute; top: 0; right: 0; bottom: 56px; width: 50%; z-index: 1; }
+    .hero-robot spline-viewer{ width: 100%; height: 100%; display: block; }
+  }
   .hero-badge-row{ display: flex; flex-wrap: wrap; align-items: center; gap: 12px; font-family: "Space Mono", monospace; font-size: .68rem; text-transform: uppercase; letter-spacing: .2em; margin-bottom: 32px; }
   .hero-available{ display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--gold-foreground); border-radius: 999px; padding: 6px 14px; font-weight: 700; }
   .hero-available-dot{ width: 6px; height: 6px; border-radius: 50%; background: var(--gold-foreground); }
@@ -341,6 +346,11 @@
   .surface-gold{ background: var(--gold); color: var(--gold-foreground); }
   .surface-cyan{ background: var(--cyan); color: var(--cyan-foreground); }
   .surface-plum{ background: var(--plum); color: var(--plum-foreground); }
+  @media (min-width: 800px){
+    .project-card.wide{ grid-column: 1 / -1; display: grid; grid-template-columns: 7fr 5fr; }
+    .project-card.wide .project-thumb{ aspect-ratio: auto; min-height: 100%; }
+    .project-card.wide .project-body{ display: flex; flex-direction: column; justify-content: center; padding: 32px; }
+  }
 
   /* ---------- Skills ---------- */
   .section-skills{ background: var(--ink); color: var(--ink-foreground); border-top: 2px solid var(--line); }
@@ -487,12 +497,15 @@
         <a href="https://t.me/Humoyun_Mirzo07" target="_blank" rel="noopener">Telegram</a>
       </div>
     </div>
-    <p class="hero-meta" data-i18n="heroMeta">TOSHKENT, OʻZBEKISTON · NAJOT TAʼLIM MENTOR · 5 OY TAJRIBA</p>
+    <p class="hero-meta" data-i18n="heroMeta">TOSHKENT, OʻZBEKISTON · NAJOT TAʼLIM MENTOR · 1 YIL TAJRIBA</p>
+  </div>
+  <div class="hero-robot" aria-hidden="true">
+    <spline-viewer url="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" loading-anim-type="none"></spline-viewer>
   </div>
   <div class="marquee-strip">
     <div class="marquee-track">
-      <span>FULLSTACK · NODE.JS · REACT · TYPESCRIPT · NEXT.JS · TAILWIND · THEWINNER · TAAM · BUILDFINDER · UNIM · </span>
-      <span>FULLSTACK · NODE.JS · REACT · TYPESCRIPT · NEXT.JS · TAILWIND · THEWINNER · TAAM · BUILDFINDER · UNIM · </span>
+      <span>FULLSTACK · NODE.JS · REACT · TYPESCRIPT · NEXT.JS · TAILWIND · MAGI · THEWINNER · TAAM · BUILDFINDER · UNIM · </span>
+      <span>FULLSTACK · NODE.JS · REACT · TYPESCRIPT · NEXT.JS · TAILWIND · MAGI · THEWINNER · TAAM · BUILDFINDER · UNIM · </span>
     </div>
   </div>
 </header>
@@ -508,14 +521,14 @@
       <p class="about-text reveal" data-i18n="aboutText">
         Full-stack dasturchi (Node.js / React / TypeScript). Tijorat loyihalarini ishlab chiqish, maʼlumotlar
         bazasini loyihalash va backend xizmatlarini optimallashtirish boʻyicha tajribaga egaman. Najot Taʼlim
-        markazida 5 oydan buyon talabalarga Full Stack dasturlashni oʻrgataman va shu bilan birga bir nechta
+        markazida 1 yildan buyon talabalarga Full Stack dasturlashni oʻrgataman va shu bilan birga bir nechta
         startaplar uchun backend qismini ishlab chiqishda ishtirok etganman. Boshqa odamlarning kodini tez tushunaman, jamoada
         ishlay olaman va texnik darajamni doimiy oshirib boraman.
       </p>
       <div class="stats-grid">
         <div class="stat-card reveal"><p class="value">Najot Taʼlim</p><p class="label" data-i18n="statMentor">MENTOR</p></div>
-        <div class="stat-card reveal"><p class="value" data-i18n="stat5mo">5 oy+</p><p class="label" data-i18n="statCommercial">TIJORAT TAJRIBA</p></div>
-        <div class="stat-card reveal"><p class="value">4</p><p class="label" data-i18n="statLive">JONLI LOYIHA</p></div>
+        <div class="stat-card reveal"><p class="value" data-i18n="stat5mo">1 yil+</p><p class="label" data-i18n="statCommercial">TIJORAT TAJRIBA</p></div>
+        <div class="stat-card reveal"><p class="value">5</p><p class="label" data-i18n="statLive">JONLI LOYIHA</p></div>
         <div class="stat-card reveal"><p class="value" data-i18n="statCity">Toshkent</p><p class="label" data-i18n="statCountry">OʻZBEKISTON</p></div>
       </div>
     </div>
@@ -538,6 +551,21 @@
     </div>
 
     <div class="project-grid" id="project-grid">
+      <a class="project-card wide surface-cyan reveal" data-cats="Fullstack AI" href="https://magi-frontend-tau.vercel.app" target="_blank" rel="noopener">
+        <div class="project-thumb"><img src="/projects/project-magi.jpg" alt="MAGI loyihasining koʻrinishi" loading="lazy" width="1024" height="640"></div>
+        <div class="project-body">
+          <div class="project-meta"><span class="cat">Fullstack</span><span>2026</span></div>
+          <h3 class="project-title">MAGI<span class="sub">(University)</span></h3>
+          <p class="project-desc" data-i18n="project5Desc">Universitet va oʻquv markazlari uchun imtihon va oʻquv jarayonini boshqarish platformasi: guruhlar, dars jadvali, imtihon va uy vazifalari, avtomatik baholash, reyting va bildirishnomalar. Oʻqituvchi va direktor uchun admin panel hamda imtihon tuzish, maʼlumotlarni toʻldirishda yordam beradigan Magi AI yordamchisi bor.</p>
+          <div class="project-foot">
+            <p class="project-stack">Node.js · Express · PostgreSQL · Next.js · TypeScript · OpenAI</p>
+            <div class="project-links">
+              <span class="mono" data-i18n="visitLabel">Saytni koʻrish ↗</span>
+            </div>
+          </div>
+        </div>
+      </a>
+
       <a class="project-card surface-ink reveal" data-cats="Fullstack AI" href="https://the-winner-frontend.vercel.app" target="_blank" rel="noopener">
         <div class="project-thumb"><img src="/projects/project-thewinner.jpg" alt="TheWinner loyihasining koʻrinishi" loading="lazy" width="1024" height="640"></div>
         <div class="project-body">
@@ -730,6 +758,16 @@
   </div>
 </footer>
 
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.10.99/build/spline-viewer.js"></script>
+<script type="module">
+  // hide the "Built with Spline" badge
+  customElements.whenDefined("spline-viewer").then(() => {
+    const v = document.querySelector("spline-viewer");
+    const hide = () => v?.shadowRoot?.querySelector("#logo")?.remove();
+    v?.addEventListener("load-complete", hide);
+    setTimeout(hide, 3000);
+  });
+</script>
 <script>
 (function(){
   var STRINGS = {
@@ -745,14 +783,14 @@
       heroAvailable: "Yangi loyihalar uchun ochiqman",
       heroRoleWord: "Fullstack dasturchi",
       heroTagline: "Node.js, React va TypeScript asosida ishonchli, zamonaviy va kengaytiriladigan veb-ilovalar yarataman.",
-      heroMeta: "TOSHKENT, OʻZBEKISTON · NAJOT TAʼLIM MENTOR · 5 OY TAJRIBA",
+      heroMeta: "TOSHKENT, OʻZBEKISTON · NAJOT TAʼLIM MENTOR · 1 YIL TAJRIBA",
       btnResume: "Rezyumeni koʻrish",
       btnContact: "Bogʻlanish",
       aboutEyebrow: "Men haqimda",
       aboutHeading: "Kim man?",
-      aboutText: "Full-stack dasturchi (Node.js / React / TypeScript). Tijorat loyihalarini ishlab chiqish, maʼlumotlar bazasini loyihalash va backend xizmatlarini optimallashtirish boʻyicha tajribaga egaman. Najot Taʼlim markazida 5 oydan buyon talabalarga Full Stack dasturlashni oʻrgataman va shu bilan birga bir nechta startaplar uchun backend qismini ishlab chiqishda ishtirok etganman. Boshqa odamlarning kodini tez tushunaman, jamoada ishlay olaman va texnik darajamni doimiy oshirib boraman.",
+      aboutText: "Full-stack dasturchi (Node.js / React / TypeScript). Tijorat loyihalarini ishlab chiqish, maʼlumotlar bazasini loyihalash va backend xizmatlarini optimallashtirish boʻyicha tajribaga egaman. Najot Taʼlim markazida 1 yildan buyon talabalarga Full Stack dasturlashni oʻrgataman va shu bilan birga bir nechta startaplar uchun backend qismini ishlab chiqishda ishtirok etganman. Boshqa odamlarning kodini tez tushunaman, jamoada ishlay olaman va texnik darajamni doimiy oshirib boraman.",
       statMentor: "MENTOR",
-      stat5mo: "5 oy+",
+      stat5mo: "1 yil+",
       statCommercial: "TIJORAT TAJRIBA",
       statLive: "JONLI LOYIHA",
       statCity: "Toshkent",
@@ -764,6 +802,7 @@
       project2Desc: "Restoranlarni kashf etish va bron qilish platformasi: Taam AI tavsiyalari, toifalar boʻyicha filtr, reyting va sharhlar.",
       project3Desc: "Qurilish materiallari uchun onlayn doʻkon: mahsulot katalogi, savat, buyurtmalar, sharhlar va xaritada yetkazib berish.",
       project4Desc: "Oʻzbekistondagi barcha dorilarni nazorat qiladigan, kundalik sogʻliq yordamchisi — mutaxassislardan onlayn tavsiyalar va AI yordamchisi bilan.",
+      project5Desc: "Universitet va oʻquv markazlari uchun imtihon va oʻquv jarayonini boshqarish platformasi: guruhlar, dars jadvali, imtihon va uy vazifalari, avtomatik baholash, reyting va bildirishnomalar. Oʻqituvchi va direktor uchun admin panel hamda imtihon tuzish, maʼlumotlarni toʻldirishda yordam beradigan Magi AI yordamchisi bor.",
       visitLabel: "Saytni koʻrish ↗",
       codeLabel: "Kod · GitHub",
       skillsEyebrow: "Koʻnikmalar",
@@ -827,14 +866,14 @@
       heroAvailable: "Открыт для новых проектов",
       heroRoleWord: "Fullstack разработчик",
       heroTagline: "Создаю надёжные, современные и масштабируемые веб-приложения на Node.js, React и TypeScript.",
-      heroMeta: "ТАШКЕНТ, УЗБЕКИСТАН · МЕНТОР NAJOT TAʼLIM · 5 МЕС. ОПЫТА",
+      heroMeta: "ТАШКЕНТ, УЗБЕКИСТАН · МЕНТОР NAJOT TAʼLIM · 1 ГОД ОПЫТА",
       btnResume: "Смотреть резюме",
       btnContact: "Связаться",
       aboutEyebrow: "Обо мне",
       aboutHeading: "Кто я?",
-      aboutText: "Full-stack разработчик (Node.js / React / TypeScript). Имею опыт коммерческой разработки, проектирования баз данных и оптимизации backend-сервисов. Уже 5 месяцев преподаю Full Stack разработку студентам в учебном центре Najot Taʼlim, а также участвовал в разработке backend-части для нескольких стартапов. Быстро разбираюсь в чужом коде, умею работать в команде и постоянно повышаю свой технический уровень.",
+      aboutText: "Full-stack разработчик (Node.js / React / TypeScript). Имею опыт коммерческой разработки, проектирования баз данных и оптимизации backend-сервисов. Уже год преподаю Full Stack разработку студентам в учебном центре Najot Taʼlim, а также участвовал в разработке backend-части для нескольких стартапов. Быстро разбираюсь в чужом коде, умею работать в команде и постоянно повышаю свой технический уровень.",
       statMentor: "МЕНТОР",
-      stat5mo: "5 мес.+",
+      stat5mo: "1 год+",
       statCommercial: "КОММЕРЧ. ОПЫТ",
       statLive: "ЖИВЫХ ПРОЕКТА",
       statCity: "Ташкент",
@@ -846,6 +885,7 @@
       project2Desc: "Платформа для поиска и бронирования ресторанов: рекомендации Taam AI, фильтр по категориям, рейтинги и отзывы.",
       project3Desc: "Интернет-магазин строительных материалов: каталог товаров, корзина, заказы, отзывы и доставка с картой.",
       project4Desc: "Ежедневный помощник по здоровью, отслеживающий все лекарства в Узбекистане — с онлайн-рекомендациями специалистов и AI-помощником.",
+      project5Desc: "Платформа для управления экзаменами и учебным процессом в университетах и учебных центрах: группы, расписание, экзамены и домашние задания, автоматическая оценка, рейтинг и уведомления. Есть админ-панель для преподавателей и директора, а также ИИ-помощник Magi AI, который помогает составлять экзамены и заполнять данные.",
       visitLabel: "Смотреть сайт ↗",
       codeLabel: "Код · GitHub",
       skillsEyebrow: "Навыки",
@@ -909,14 +949,14 @@
       heroAvailable: "Available for new projects",
       heroRoleWord: "Fullstack developer",
       heroTagline: "I build reliable, modern, and scalable web applications with Node.js, React, and TypeScript.",
-      heroMeta: "TASHKENT, UZBEKISTAN · NAJOT TAʼLIM MENTOR · 5 MOS. EXPERIENCE",
+      heroMeta: "TASHKENT, UZBEKISTAN · NAJOT TAʼLIM MENTOR · 1 YR EXPERIENCE",
       btnResume: "View résumé",
       btnContact: "Contact",
       aboutEyebrow: "About me",
       aboutHeading: "Who am I?",
-      aboutText: "Full-stack developer (Node.js / React / TypeScript) with experience in commercial development, database design, and backend service optimization. For the past 5 months I've been teaching Full Stack development to students at the Najot Taʼlim center, and have also contributed to backend development for several startups. I pick up unfamiliar code quickly, work well in a team, and keep sharpening my technical skills.",
+      aboutText: "Full-stack developer (Node.js / React / TypeScript) with experience in commercial development, database design, and backend service optimization. For the past year I've been teaching Full Stack development to students at the Najot Taʼlim center, and have also contributed to backend development for several startups. I pick up unfamiliar code quickly, work well in a team, and keep sharpening my technical skills.",
       statMentor: "MENTOR",
-      stat5mo: "5 mo.+",
+      stat5mo: "1 yr+",
       statCommercial: "COMMERCIAL EXP.",
       statLive: "LIVE PROJECTS",
       statCity: "Tashkent",
@@ -928,6 +968,7 @@
       project2Desc: "A restaurant discovery and booking platform: Taam AI recommendations, category filters, ratings and reviews.",
       project3Desc: "An online store for construction materials: product catalog, cart, orders, reviews, and map-based delivery.",
       project4Desc: "A daily health assistant that tracks every medicine available in Uzbekistan, with online recommendations from specialists and an AI assistant.",
+      project5Desc: "An exam and learning management platform for universities and learning centers: groups, class timetables, exams and homework, automatic grading, rankings, and notifications. Includes an admin panel for teachers and directors, plus Magi AI, an assistant that helps build exams and fill in data.",
       visitLabel: "Visit site ↗",
       codeLabel: "Code · GitHub",
       skillsEyebrow: "Skills",
