@@ -105,6 +105,8 @@
   .layer.plum{ background: var(--plum); color: var(--plum-foreground); }
   .layer.gold{ background: var(--gold); color: var(--gold-foreground); }
   .layer h3{ margin: 0 0 6px; font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 1.6rem; letter-spacing: .02em; }
+  .layer .tags{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .layer .tag{ font-family: "Space Mono", monospace; font-size: .78rem; letter-spacing: .06em; padding: 7px 14px; border-radius: 999px; border: 1.5px solid currentColor; }
   .layer .tech{ font-family: "Space Mono", monospace; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .8; margin-bottom: 12px; }
   .layer ul{ margin: 0; padding-left: 18px; line-height: 1.6; }
   .roles{ display: flex; flex-wrap: wrap; gap: 10px; }
@@ -173,42 +175,19 @@
     <div class="stack">
       <div class="layer ink">
         <h3 data-i18n="l0t">Backend</h3>
-        <p class="tech">Node.js · Express · TypeScript · PostgreSQL</p>
-        <ul>
-          <li data-i18n="l0_0">Har bir boʻlim (imtihonlar, savollar, guruhlar, davomat, bildirishnomalar, AI…) alohida feature-modul</li>
-          <li data-i18n="l0_1">PostgreSQL maʼlumotlar bazasi, migratsiyalar va qator darajasidagi xavfsizlik (RLS)</li>
-          <li data-i18n="l0_2">Rollar boʻyicha ruxsatlar: kim nimani koʻra oladi va oʻzgartira oladi</li>
-          <li data-i18n="l0_3">OpenAPI hujjatlari va Vitest bilan 600 dan ortiq avtomatik test</li>
-        </ul>
+        <div class="tags"><span class="tag">Node.js</span><span class="tag">Express</span><span class="tag">TypeScript</span></div>
       </div>
       <div class="layer cyan">
         <h3 data-i18n="l1t">Frontend</h3>
-        <p class="tech">Next.js · React · TypeScript · Tailwind CSS</p>
-        <ul>
-          <li data-i18n="l1_0">Ikkita alohida ilova: talabalar sayti va admin panel</li>
-          <li data-i18n="l1_1">Oʻzbek va ingliz tillari uchun i18n</li>
-          <li data-i18n="l1_2">Real vaqtdagi bildirishnomalar va qulay formalar</li>
-          <li data-i18n="l1_3">Moslashuvchan (responsive) dizayn</li>
-        </ul>
+        <div class="tags"><span class="tag">Next.js</span><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span></div>
       </div>
       <div class="layer plum">
-        <h3 data-i18n="l2t">AI</h3>
-        <p class="tech">OpenAI API · Web search</p>
-        <ul>
-          <li data-i18n="l2_0">Suhbat orqali imtihon tuzadigan yordamchi</li>
-          <li data-i18n="l2_1">Har bir savolga tayyor javob variantlari</li>
-          <li data-i18n="l2_2">Testlarni internetdagi aniq maʼlumotlar asosida tuzish</li>
-          <li data-i18n="l2_3">Foydalanuvchi tasdiqlamaguncha hech narsa saqlanmaydi</li>
-        </ul>
+        <h3 data-i18n="l2t">Maʼlumotlar bazasi</h3>
+        <div class="tags"><span class="tag">PostgreSQL</span></div>
       </div>
       <div class="layer gold">
-        <h3 data-i18n="l3t">Infratuzilma</h3>
-        <p class="tech">Railway · Vercel · Supabase</p>
-        <ul>
-          <li data-i18n="l3_0">Backend Railway'da, saytlar Vercel'da</li>
-          <li data-i18n="l3_1">Fayllar Supabase Storage'da</li>
-          <li data-i18n="l3_2">GitHub'ga push qilinganda avtomatik deploy</li>
-        </ul>
+        <h3 data-i18n="l3t">AI</h3>
+        <div class="tags"><span class="tag">OpenAI API</span></div>
       </div>
     </div>
   </div>
@@ -252,24 +231,9 @@
     "f8t": "Два языка",
     "f8d": "Весь интерфейс на узбекском и английском.",
     "l0t": "Backend",
-    "l0_0": "Каждый раздел (экзамены, вопросы, группы, посещаемость, уведомления, ИИ…) — отдельный feature-модуль",
-    "l0_1": "База данных PostgreSQL, миграции и защита на уровне строк (RLS)",
-    "l0_2": "Права по ролям: кто что может видеть и менять",
-    "l0_3": "Документация OpenAPI и более 600 автотестов на Vitest",
     "l1t": "Frontend",
-    "l1_0": "Два отдельных приложения: сайт для студентов и админ-панель",
-    "l1_1": "i18n для узбекского и английского",
-    "l1_2": "Уведомления в реальном времени и удобные формы",
-    "l1_3": "Адаптивный дизайн",
-    "l2t": "AI",
-    "l2_0": "Помощник, который создаёт экзамен в диалоге",
-    "l2_1": "Готовые варианты ответа на каждый вопрос",
-    "l2_2": "Тесты на основе точных данных из интернета",
-    "l2_3": "Ничего не сохраняется без подтверждения пользователя",
-    "l3t": "Инфраструктура",
-    "l3_0": "Backend на Railway, сайты на Vercel",
-    "l3_1": "Файлы в Supabase Storage",
-    "l3_2": "Автоматический деплой при push в GitHub"
+    "l2t": "База данных",
+    "l3t": "AI"
   },
   "en": {
     "back": "← Back to projects",
@@ -302,24 +266,9 @@
     "f8t": "Two languages",
     "f8d": "The whole interface works in Uzbek and English.",
     "l0t": "Backend",
-    "l0_0": "Each area (exams, questions, groups, attendance, notifications, AI…) is its own feature module",
-    "l0_1": "PostgreSQL database with migrations and row-level security (RLS)",
-    "l0_2": "Role-based permissions for who can see and change what",
-    "l0_3": "OpenAPI docs and more than 600 automated tests with Vitest",
     "l1t": "Frontend",
-    "l1_0": "Two separate apps: the student website and the admin panel",
-    "l1_1": "i18n for Uzbek and English",
-    "l1_2": "Real-time notifications and easy-to-use forms",
-    "l1_3": "Responsive design",
-    "l2t": "AI",
-    "l2_0": "An assistant that builds an exam through conversation",
-    "l2_1": "Ready-made answer options for every question",
-    "l2_2": "Tests built from accurate information found online",
-    "l2_3": "Nothing is saved until the user confirms",
-    "l3t": "Infrastructure",
-    "l3_0": "Backend on Railway, websites on Vercel",
-    "l3_1": "Files in Supabase Storage",
-    "l3_2": "Automatic deploys on every push to GitHub"
+    "l2t": "Database",
+    "l3t": "AI"
   }
 };
   var KEY = 'hs-portfolio-lang';

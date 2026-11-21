@@ -105,6 +105,8 @@
   .layer.plum{ background: var(--plum); color: var(--plum-foreground); }
   .layer.gold{ background: var(--gold); color: var(--gold-foreground); }
   .layer h3{ margin: 0 0 6px; font-family: "Anton", sans-serif; font-weight: 400; text-transform: uppercase; font-size: 1.6rem; letter-spacing: .02em; }
+  .layer .tags{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .layer .tag{ font-family: "Space Mono", monospace; font-size: .78rem; letter-spacing: .06em; padding: 7px 14px; border-radius: 999px; border: 1.5px solid currentColor; }
   .layer .tech{ font-family: "Space Mono", monospace; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; opacity: .8; margin-bottom: 12px; }
   .layer ul{ margin: 0; padding-left: 18px; line-height: 1.6; }
   .roles{ display: flex; flex-wrap: wrap; gap: 10px; }
@@ -173,40 +175,19 @@
     <div class="stack">
       <div class="layer ink">
         <h3 data-i18n="l0t">Backend</h3>
-        <p class="tech">NestJS · Prisma · PostgreSQL · JWT</p>
-        <ul>
-          <li data-i18n="l0_0">Har bir boʻlim (kassa, ombor, sotuv, moliya…) alohida NestJS moduli: controller, service va DTO</li>
-          <li data-i18n="l0_1">Prisma ORM va 25 ta jadvaldan iborat maʼlumotlar bazasi sxemasi, migratsiyalar</li>
-          <li data-i18n="l0_2">JWT orqali autentifikatsiya va rollar boʻyicha ruxsatlar</li>
-          <li data-i18n="l0_3">class-validator bilan kiruvchi maʼlumotlarni tekshirish</li>
-        </ul>
+        <div class="tags"><span class="tag">NestJS</span><span class="tag">Node.js</span><span class="tag">TypeScript</span></div>
       </div>
       <div class="layer cyan">
         <h3 data-i18n="l1t">Frontend</h3>
-        <p class="tech">React · Vite · TypeScript · Tailwind CSS</p>
-        <ul>
-          <li data-i18n="l1_0">TanStack Query bilan server maʼlumotlari va keshlash</li>
-          <li data-i18n="l1_1">Zustand orqali holat (state) boshqaruvi, React Router bilan sahifalar</li>
-          <li data-i18n="l1_2">JsBarcode bilan shtrix-kod, Excel fayllarni oʻqish va yozish</li>
-          <li data-i18n="l1_3">Sahifalarni kerak boʻlganda yuklash (lazy loading)</li>
-        </ul>
+        <div class="tags"><span class="tag">React</span><span class="tag">Vite</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span></div>
       </div>
       <div class="layer plum">
-        <h3 data-i18n="l2t">Infratuzilma</h3>
-        <p class="tech">Docker · Docker Compose · Monorepo</p>
-        <ul>
-          <li data-i18n="l2_0">Backend va frontend bitta monorepoda</li>
-          <li data-i18n="l2_1">PostgreSQL Docker Compose orqali ishga tushiriladi</li>
-        </ul>
+        <h3 data-i18n="l2t">Maʼlumotlar bazasi</h3>
+        <div class="tags"><span class="tag">PostgreSQL</span><span class="tag">Prisma</span></div>
       </div>
       <div class="layer gold">
-        <h3 data-i18n="l3t">Rollar</h3>
-        <p class="tech">Admin · Manager · Staff · Super Admin</p>
-        <ul>
-          <li data-i18n="l3_0">Admin — biznesning hamma boʻlimlari va sozlamalari</li>
-          <li data-i18n="l3_1">Manager va Staff — oʻz vazifasiga kerakli boʻlimlar</li>
-          <li data-i18n="l3_2">Super Admin — platformadagi barcha biznes-mijozlar va obunalar</li>
-        </ul>
+        <h3 data-i18n="l3t">Vositalar</h3>
+        <div class="tags"><span class="tag">Docker</span><span class="tag">Git</span></div>
       </div>
     </div>
   </div>
@@ -250,22 +231,9 @@
     "f8t": "Мультиязычность",
     "f8d": "Интерфейс и записи истории показываются на выбранном пользователем языке.",
     "l0t": "Backend",
-    "l0_0": "Каждый раздел (касса, склад, продажи, финансы…) — отдельный модуль NestJS: controller, service и DTO",
-    "l0_1": "Prisma ORM и схема базы данных из 25 таблиц, миграции",
-    "l0_2": "Аутентификация через JWT и права доступа по ролям",
-    "l0_3": "Валидация входящих данных через class-validator",
     "l1t": "Frontend",
-    "l1_0": "Серверные данные и кеширование через TanStack Query",
-    "l1_1": "Управление состоянием через Zustand, страницы на React Router",
-    "l1_2": "Штрихкоды через JsBarcode, чтение и запись Excel-файлов",
-    "l1_3": "Ленивая загрузка страниц (lazy loading)",
-    "l2t": "Инфраструктура",
-    "l2_0": "Backend и frontend в одном монорепозитории",
-    "l2_1": "PostgreSQL запускается через Docker Compose",
-    "l3t": "Роли",
-    "l3_0": "Админ — все разделы и настройки бизнеса",
-    "l3_1": "Менеджер и Сотрудник — разделы, нужные для их работы",
-    "l3_2": "Супер-админ — все бизнесы-клиенты и подписки платформы"
+    "l2t": "База данных",
+    "l3t": "Инструменты"
   },
   "en": {
     "back": "← Back to projects",
@@ -298,22 +266,9 @@
     "f8t": "Multiple languages",
     "f8d": "The interface and history entries are shown in the language the user picks.",
     "l0t": "Backend",
-    "l0_0": "Each area (POS, inventory, sales, finance…) is its own NestJS module with a controller, service, and DTOs",
-    "l0_1": "Prisma ORM with a 25-table database schema and migrations",
-    "l0_2": "JWT authentication and role-based permissions",
-    "l0_3": "Incoming data validated with class-validator",
     "l1t": "Frontend",
-    "l1_0": "Server data and caching with TanStack Query",
-    "l1_1": "State management with Zustand, routing with React Router",
-    "l1_2": "Barcodes with JsBarcode, reading and writing Excel files",
-    "l1_3": "Pages loaded on demand (lazy loading)",
-    "l2t": "Infrastructure",
-    "l2_0": "Backend and frontend in a single monorepo",
-    "l2_1": "PostgreSQL runs through Docker Compose",
-    "l3t": "Roles",
-    "l3_0": "Admin: every area and setting of the business",
-    "l3_1": "Manager and Staff: the areas their job needs",
-    "l3_2": "Super Admin: every client business and subscription on the platform"
+    "l2t": "Database",
+    "l3t": "Tools"
   }
 };
   var KEY = 'hs-portfolio-lang';
