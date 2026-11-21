@@ -719,22 +719,17 @@
           <p class="field-error" id="err-name" hidden></p>
         </div>
         <div class="field">
-          <label for="c-email">Email</label>
-          <input id="c-email" type="email" maxlength="255" placeholder="siz@email.com">
-          <p class="field-error" id="err-email" hidden></p>
-        </div>
-        <div class="field">
           <label for="c-message" data-i18n="formMessage">Xabar</label>
           <textarea id="c-message" rows="4" maxlength="1000" data-i18n-placeholder="formMessagePh" placeholder="Loyihangiz haqida qisqacha yozing..."></textarea>
           <p class="field-error" id="err-message" hidden></p>
         </div>
-        <button type="submit" class="contact-submit" id="contact-submit" data-i18n="formSubmit">Xabar yuborish →</button>
+        <button type="submit" class="contact-submit" id="contact-submit" data-i18n="formSubmit">Telegram orqali yuborish →</button>
       </form>
 
       <div class="contact-result" id="contact-sent" hidden>
-        <p class="tag-line" data-i18n="formSentTag">XABAR YUBORILDI</p>
-        <h3 data-i18n="formSentTitle">Rahmat!</h3>
-        <p data-i18n="formSentBody">Xabaringiz qabul qilindi. 24 soat ichida javob qaytaraman.</p>
+        <p class="tag-line" data-i18n="formSentTag">TELEGRAM OCHILDI</p>
+        <h3 data-i18n="formSentTitle">Deyarli tayyor!</h3>
+        <p data-i18n="formSentBody">Telegramda chatim xabaringiz yozilgan holda ochildi — faqat «Yuborish» tugmasini bosing.</p>
         <button type="button" id="contact-again" data-i18n="formAgain">Yana xabar yozish</button>
       </div>
 
@@ -851,11 +846,13 @@
       formNamePh: "Ismingiz",
       formMessage: "Xabar",
       formMessagePh: "Loyihangiz haqida qisqacha yozing...",
-      formSubmit: "Xabar yuborish →",
+      formSubmit: "Telegram orqali yuborish →",
+      tgHello: "Assalomu alaykum! 👋 Men {name}.",
+      tgFrom: "(portfolio sayti orqali)",
       formSending: "Yuborilmoqda...",
-      formSentTag: "XABAR YUBORILDI",
-      formSentTitle: "Rahmat!",
-      formSentBody: "Xabaringiz qabul qilindi. 24 soat ichida javob qaytaraman.",
+      formSentTag: "TELEGRAM OCHILDI",
+      formSentTitle: "Deyarli tayyor!",
+      formSentBody: "Telegramda chatim xabaringiz yozilgan holda ochildi — faqat «Yuborish» tugmasini bosing.",
       formAgain: "Yana xabar yozish",
       formErrorTitle: "Xatolik yuz berdi",
       formErrorBody: "Xabar yuborilmadi. Internet aloqasini tekshirib, qayta urinib koʻring.",
@@ -938,11 +935,13 @@
       formNamePh: "Ваше имя",
       formMessage: "Сообщение",
       formMessagePh: "Кратко опишите ваш проект...",
-      formSubmit: "Отправить →",
+      formSubmit: "Отправить в Telegram →",
+      tgHello: "Здравствуйте! 👋 Меня зовут {name}.",
+      tgFrom: "(через сайт-портфолио)",
       formSending: "Отправка...",
-      formSentTag: "СООБЩЕНИЕ ОТПРАВЛЕНО",
-      formSentTitle: "Спасибо!",
-      formSentBody: "Ваше сообщение получено. Отвечу в течение 24 часов.",
+      formSentTag: "TELEGRAM ОТКРЫТ",
+      formSentTitle: "Почти готово!",
+      formSentBody: "В Telegram открылся мой чат с вашим сообщением — осталось нажать «Отправить».",
       formAgain: "Написать ещё",
       formErrorTitle: "Произошла ошибка",
       formErrorBody: "Сообщение не отправлено. Проверьте соединение и попробуйте снова.",
@@ -1025,11 +1024,13 @@
       formNamePh: "Your name",
       formMessage: "Message",
       formMessagePh: "Briefly describe your project...",
-      formSubmit: "Send message →",
+      formSubmit: "Send via Telegram →",
+      tgHello: "Hi! 👋 My name is {name}.",
+      tgFrom: "(via your portfolio site)",
       formSending: "Sending...",
-      formSentTag: "MESSAGE SENT",
-      formSentTitle: "Thank you!",
-      formSentBody: "Your message has been received. I'll reply within 24 hours.",
+      formSentTag: "TELEGRAM OPENED",
+      formSentTitle: "Almost done!",
+      formSentBody: "My Telegram chat just opened with your message filled in. Just tap Send.",
       formAgain: "Send another message",
       formErrorTitle: "Something went wrong",
       formErrorBody: "The message wasn't sent. Check your connection and try again.",
@@ -1155,18 +1156,13 @@
   var sentBox = document.getElementById('contact-sent');
   var failBox = document.getElementById('contact-failed');
   var nameEl = document.getElementById('c-name');
-  var emailEl = document.getElementById('c-email');
   var messageEl = document.getElementById('c-message');
   var errName = document.getElementById('err-name');
-  var errEmail = document.getElementById('err-email');
   var errMessage = document.getElementById('err-message');
 
-  var SUPABASE_URL = 'https://rnbypafwjeyrvlmkulyj.supabase.co';
-  var SUPABASE_KEY = 'sb_publishable_Xpumw1OtiqtAU8ZFq7J4uQ_qCi2GdjP';
-  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   function clearErrors(){
-    [errName, errEmail, errMessage].forEach(function(el){ el.hidden = true; el.textContent = ''; });
+    [errName, errMessage].forEach(function(el){ el.hidden = true; el.textContent = ''; });
   }
 
   function showResult(which){
@@ -1193,18 +1189,12 @@
     clearErrors();
     var dict = window.__hsDict ? window.__hsDict() : {};
     var name = nameEl.value.trim();
-    var email = emailEl.value.trim();
     var message = messageEl.value.trim();
     var ok = true;
 
     if (name.length < 2 || name.length > 100) {
       errName.textContent = dict.errNameMin || 'Enter your name.';
       errName.hidden = false;
-      ok = false;
-    }
-    if (!EMAIL_RE.test(email) || email.length > 255) {
-      errEmail.textContent = dict.errEmail || 'Enter a valid email.';
-      errEmail.hidden = false;
       ok = false;
     }
     if (message.length < 10 || message.length > 1000) {
@@ -1214,31 +1204,9 @@
     }
     if (!ok) return;
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = dict.formSending || 'Sending...';
-
-    // saved in supabase as before and sent to telegram, either one is enough
-    var payload = JSON.stringify({ name: name, email: email, message: message });
-    var saved = fetch(SUPABASE_URL + '/rest/v1/contact_messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY,
-        'Prefer': 'return=minimal'
-      },
-      body: payload
-    }).then(function(res){ return res.ok; }).catch(function(){ return false; });
-    var sent = fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: payload
-    }).then(function(res){ return res.ok; }).catch(function(){ return false; });
-
-    Promise.all([saved, sent]).then(function(r){
-      submitBtn.disabled = false;
-      submitBtn.textContent = dict.formSubmit || 'Send';
-      showResult(r[0] || r[1] ? 'sent' : 'error');
-    });
+    var text = (dict.tgHello || 'Hi! I am {name}.').replace('{name}', name) + '\n\n' + message + '\n\n' + (dict.tgFrom || '');
+    window.open('https://t.me/Humoyun_Mirzo07?text=' + encodeURIComponent(text), '_blank', 'noopener');
+    showResult('sent');
   });
 })();
 
